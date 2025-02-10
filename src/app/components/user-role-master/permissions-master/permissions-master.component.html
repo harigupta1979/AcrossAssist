@@ -1,0 +1,32 @@
+<div class="permission-container">
+  <!-- Roles Box -->
+  <div class="permission-box">
+    <span class="permission-heding-title">Roles</span>
+    <mat-selection-list class="mdc-list-item__primary-text">
+      <mat-list-option *ngFor="let role of roles" (click)="selectRole(role)" [selected]="role === selectedRole">
+        {{ role.name }}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+  <!-- Modules Box -->
+  <div class="permission-box" *ngIf="selectedRole">
+    <span class="permission-heding-title">Modules</span>
+    <mat-selection-list class="mdc-list-item__primary-text">
+      <mat-list-option class="mat-list-text" *ngFor="let module of selectedRole.modules" (click)="selectModule(module)"
+        [selected]="module === selectedModule">
+        {{ module.name }}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+
+  <!-- Access permission-box -->
+  <div class="permission-box" *ngIf="selectedModule">
+    <span class="permission-heding-title">Access</span>
+    <mat-selection-list class="mdc-list-item__primary-text">
+      <mat-list-option *ngFor="let access of selectedModule.accesses">
+        {{ access.name }} <!-- Only text here -->
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+
+</div>

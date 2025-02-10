@@ -1,0 +1,204 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.login-sub-container {
+  height: 100vh;
+  overflow: hidden;
+  padding: 0 10% 0 0;
+}
+
+.login-mat-card {
+  position: relative;
+  bottom: 0;
+  top: 20%;
+}
+
+.login-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-text {
+  padding-bottom: 5%;
+}
+
+.login-containt {
+  text-align: left;
+  background-color: #ffff;
+  border-radius: 12px 12px 0 0;
+  padding: 9% 8%;
+  height: 90vh;
+}
+
+.login-heding {
+  font-weight: 500;
+}
+
+.login-heding-span {
+  color: #333333;
+  font-size: 12px;
+  margin: 0;
+}
+
+.login-mat-label {
+  font-size: 12px;
+}
+
+.form-field {
+  width: 100%;
+  margin: 0% 0%;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding-bottom: 6%;
+}
+
+.login-termsAccepted {
+  width: 77%;
+  font-size: 11px;
+  color: #696f79;
+  font-family: "Mukta Vaani";
+}
+
+.forgot-password-link {
+  width: 44%;
+  font-size: 12px;
+  color: #2286d1;
+  text-decoration: none;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
+
+.login-button button {
+  width: 100%;
+  /* border-radius: 12px; */
+  padding-top: 1%;
+  align-items: center;
+}
+
+/* Responsive Styles */
+
+/* Medium devices (tablets and below) */
+@media (max-width: 1024px) {
+  .login-sub-container {
+    padding: 0 5%;
+  }
+
+  .login-containt {
+    padding: 6% 5%;
+  }
+
+  .login-heding {
+    font-size: 16px;
+  }
+
+  .login-heding-span {
+    font-size: 10px;
+  }
+
+  .form-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 4%;
+  }
+
+  .login-termsAccepted {
+    width: 100%;
+    font-size: 10px;
+  }
+
+  .forgot-password-link {
+    width: 100%;
+    font-size: 10px;
+    text-align: right;
+  }
+}
+
+/* Small devices (mobile phones) */
+@media (max-width: 768px) {
+  .login-sub-container {
+    padding: 0 3%;
+  }
+
+  .login-containt {
+    padding: 6% 4%;
+  }
+
+  .login-heding {
+    font-size: 14px;
+  }
+
+  .login-heding-span {
+    font-size: 9px;
+  }
+
+  .form-footer {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-termsAccepted {
+    font-size: 9px;
+    text-align: center;
+  }
+
+  .forgot-password-link {
+    font-size: 9px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .login-button button {
+    font-size: 14px;
+    padding-top: 10px;
+  }
+}
+
+/* Extra small devices (smaller mobile screens) */
+@media (max-width: 480px) {
+  .login-sub-container {
+    padding: 0 2%;
+  }
+
+  .login-containt {
+    padding: 6% 3%;
+  }
+
+  .login-heding {
+    font-size: 12px;
+  }
+
+  .login-heding-span {
+    font-size: 8px;
+  }
+
+  .login-termsAccepted {
+    font-size: 8px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .forgot-password-link {
+    font-size: 8px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .login-button button {
+    font-size: 12px;
+    padding-top: 8px;
+  }
+}

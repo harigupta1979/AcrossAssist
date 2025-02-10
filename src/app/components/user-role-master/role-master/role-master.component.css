@@ -1,0 +1,77 @@
+/* Adding 12px border to the entire table */
+.role-master-container {
+  padding-top: 10px;
+  width: 100%;
+}
+.mat-elevation-z8 {
+  text-align: center;
+}
+.mat-mdc-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: ccdeeb !important;
+  border: 1px solid #ccdeeb !important;
+  border-radius: 6px 6px 0 0 !important;
+  overflow-x: auto;
+}
+.spacer-column {
+  width: 100%;
+  background: transparent;
+  border: none !important;
+}
+
+.mat-mdc-header-row {
+  text-wrap: nowrap !important;
+  background-color: #ccdeeb !important;
+  border-bottom: 1px solid #ccdeeb !important;
+}
+
+.mat-mdc-table::-webkit-scrollbar {
+  height: 8px;
+}
+.mat-mdc-table::-webkit-scrollbar-thumb {
+  background-color: #ccdeeb;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+th {
+  color: #000000;
+  padding-top: 18px !important;
+  text-align: center;
+  text-wrap: nowrap !important;
+  padding-top: 15px;
+  font-size: 16px;
+  border-bottom: 1px solid #ccdeeb !important;
+}
+td {
+  color: #1d1b20;
+  opacity: 80%;
+  text-wrap: nowrap !important;
+  font-size: 13px;
+  text-align: center;
+  border-top: 1px #e7f5ff;
+  padding: 0%;
+  border-bottom: 1px solid #ccdeeb !important;
+}
+
+.mat-mdc-table tr:nth-child(odd) td {
+  background-color: #e7f5ff !important;
+}
+
+.mat-mdc-table tr:nth-child(even) td {
+  background-color: #ffffff !important;
+}
+.active-button {
+  width: 80%;
+  height: 30px;
+  background-color: #2e9946 !important;
+}
+.mat-column-permission {
+  /* You can use margin or gap for dynamic spacing */
+  padding-right: 300px; /* Creates space between Permission and Created Date */
+}
+
+/* Adjust createdDate column padding */
+.mat-column-createdDate {
+  padding-left: 100px; /* Padding for the Created Date column */
+}

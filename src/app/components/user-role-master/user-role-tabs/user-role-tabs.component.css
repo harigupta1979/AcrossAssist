@@ -1,0 +1,73 @@
+.heading-container {
+  text-align: start;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.tab-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.search-container {
+  position: relative;
+  display: inline-block;
+  gap: 10px;
+  width: 40%;
+}
+
+.search-input {
+  width: 84%;
+  padding: 8px;
+  border-radius: 22px;
+  border: 1px solid #333333;
+  padding-left: 31px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #868fa0;
+}
+
+button {
+  margin-left: 16px;
+}
+
+.mat-tab-group {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-tab-label {
+  margin-right: 20px;
+  color: white !important;
+}
+
+.mat-icon {
+  margin-right: 8px;
+}
+
+.mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  color: #2286d1 !important;
+}
+.mat-mdc-tab.mdc-tab {
+  color: #1d1b20cc;
+}
+.mat-drawer-container {
+  color: #1d1b20;
+  opacity: 80%;
+  font-family: Mukta vaani;
+}
+/* Default tab label styling */
+.mat-mdc-tab .mdc-tab__text-label {
+  font-family: "Mukta Vaani", sans-serif; /* Correct font declaration */
+  font-size: 18px;
+  color: #000; /* Default color for inactive tabs */
+}

@@ -1,0 +1,123 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  background-image: url("../../../assets/img/Piaggio-BG.png");
+  border-radius: 0;
+  padding: 0 20px; /* Add some padding for smaller screens */
+}
+
+.example-card,
+.outlet-container {
+  width: 100%;
+  max-width: 50%;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.example-header-image-container {
+  margin: 0 10% 7%;
+  display: flex;
+  justify-content: start;
+}
+
+.example-header-image {
+  display: flex;
+  align-items: start;
+  width: 30%;
+  height: 100%;
+  display: block;
+}
+
+.heading {
+  margin: 0 10%;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.25px;
+  color: #ffffff;
+  text-align: start;
+}
+
+.description {
+  margin: 0 10%;
+  font-size: 12px;
+  line-height: 24px;
+  color: #f0f0f0;
+  display: block;
+  margin-top: 10px;
+  text-align: start;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .example-card,
+  .outlet-container {
+    max-width: 90%;
+  }
+
+  .example-header-image {
+    width: 50%;
+  }
+
+  .heading {
+    font-size: 16px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    padding: 0 10px;
+    align-items: center;
+  }
+
+  .example-card,
+  .outlet-container {
+    max-width: 100%;
+    padding: 50px;
+    justify-content: center;
+  }
+
+  .example-header-image {
+    width: 70%;
+  }
+
+  .heading {
+    font-size: 14px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .example-card,
+  .outlet-container {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .example-header-image {
+    width: 100%;
+  }
+
+  .heading {
+    font-size: 12px;
+  }
+
+  .description {
+    font-size: 10px;
+  }
+}

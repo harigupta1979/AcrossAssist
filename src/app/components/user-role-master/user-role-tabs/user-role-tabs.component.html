@@ -1,0 +1,42 @@
+<div class="user-role-main-container">
+  <div>
+    <span class="heading-container">User & Role</span>
+  </div>
+
+  <!-- Tab Row -->
+  <div class="tab-row">
+    <mat-tab-group [(selectedIndex)]="selectedTabIndex" (selectedIndexChange)="onTabChange($event)">
+      <mat-tab label="User"></mat-tab>
+      <mat-tab label="Role"></mat-tab>
+      <mat-tab label="Permissions"></mat-tab>
+    </mat-tab-group>
+
+    <!-- Search Bar in the Center -->
+    <div class="search-container">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" placeholder="Search..." class="search-input" />
+    </div>
+
+    <!-- Conditionally render Add button based on selected tab -->
+    <ng-container *ngIf="selectedTabIndex === 0">
+      <button mat-stroked-button color="primary">
+        <mat-icon>add</mat-icon> Add User
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="selectedTabIndex === 1">
+      <button mat-stroked-button color="primary">
+        <mat-icon>add</mat-icon> Add Role
+      </button>
+    </ng-container>
+    <ng-container *ngIf="selectedTabIndex === 2 && isSaveVisible">
+      <button mat-stroked-button color="primary" (click)="savePermissions()">
+        <mat-icon>save</mat-icon> Save
+      </button>
+    </ng-container>
+
+
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

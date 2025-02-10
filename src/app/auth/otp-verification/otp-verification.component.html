@@ -1,0 +1,33 @@
+<div class="verify-otp-container">
+  <div class="verify-otp-sub-container">
+    <div class="verify-otp-mat-card">
+      <div class="verify-otp-content">
+        <div class="verify-otp-header">
+          <span class="opt-header-span">Verify your Email.</span>
+          <p class="verify-otp-heading">Enter OTP (One Time Password) sent to your Email Id ahmad123gmail.com</p>
+        </div>
+        <form>
+          <!-- OTP Input Fields (Separate boxes for each digit) -->
+          <div class="otp-shadow-box">
+            <div class="otp-input-container">
+              <input matInput type="text" maxlength="1" formControlName="otp1" required />
+              <input matInput type="text" maxlength="1" formControlName="otp2" required />
+              <input matInput type="text" maxlength="1" formControlName="otp3" required />
+              <input matInput type="text" maxlength="1" formControlName="otp4" required />
+              <input matInput type="text" maxlength="1" formControlName="otp5" required />
+              <input matInput type="text" maxlength="1" formControlName="otp6" required />
+            </div>
+          </div>
+          <div class="otp-footer">
+            <a href="javascript:void(0);" class="resend-otp-link">Resend OTP</a>
+            <span class="otp-timer">00:30</span>
+          </div>
+
+          <div class="otp-button">
+            <button mat-flat-button>Verify OTP</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
