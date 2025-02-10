@@ -12,5 +12,5 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'Piaggio-front';
+  title = 'Acrossassist-front';
 }
