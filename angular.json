@@ -66,7 +66,7 @@
               "buildTarget": "Acrossassist-front:build:production"
             },
             "development": {
-              "buildTarget": "Acrossassist-frontt:build:development"
+              "buildTarget": "Acrossassist-front:build:development"
             }
           },
           "defaultConfiguration": "development"
