@@ -25,14 +25,14 @@ export class RoleMasterComponent {
   dataSource: any[] = [];
   displayedColumns: string[] = [
     'RoleName',
-    'permission',
+    'RoleDesc',
     'createdDate',
     'status',
     'action',
   ];
   async getrole() {
     let dataobj: Record<string, any> | null | undefined =
-      await this.sharedservice.GetSelection('role', '', 0, 0);
+      await this.sharedservice.GetSelection('role', null, null, null);
 
     if (dataobj && dataobj['Data']) {
       this.dataSource = dataobj['Data'].map((item: any) => ({
@@ -48,10 +48,12 @@ export class RoleMasterComponent {
     const obj = {
       RoleName: null,
     };
-    const data = await this.service.GetRoleList(obj);
-    console.log(obj, 'rolename');
+    const data: Record<string, any> | null | undefined = await this.service.GetRoleList(obj);
+    //console.log(data, 'rolename');
 
-    if (data != null) {
+    if (data && data['Data']) {
+      this.dataSource=data['Data'];//Property 'Data' does not exist on type 'Object'.ts(2339)
+      console.log(this.dataSource, 'rolename');
     } else {
       this.dataLength = false;
     }

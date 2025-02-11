@@ -1,32 +1,62 @@
 <div class="permission-container">
   <!-- Roles Box -->
   <div class="permission-box">
-    <span class="permission-heding-title">Roles</span>
-    <mat-selection-list class="mdc-list-item__primary-text">
-      <mat-list-option *ngFor="let role of roles" (click)="selectRole(role)" [selected]="role === selectedRole">
-        {{ role.name }}
+    <span class="permission-heading-title">Roles</span>
+    <mat-selection-list class="mdc-list-item__primary-text" selectionMode="single">
+      <mat-list-option *ngFor="let role of roles" (click)="onRoleSelect(role.RoleId)" [selected]="role.RoleId === selectedRole">
+        {{ role.RoleName }}
       </mat-list-option>
     </mat-selection-list>
   </div>
+
   <!-- Modules Box -->
-  <div class="permission-box" *ngIf="selectedRole">
-    <span class="permission-heding-title">Modules</span>
-    <mat-selection-list class="mdc-list-item__primary-text">
-      <mat-list-option class="mat-list-text" *ngFor="let module of selectedRole.modules" (click)="selectModule(module)"
-        [selected]="module === selectedModule">
-        {{ module.name }}
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
+  <div class="menu-container">
+    <mat-list>
+      <!-- Select All -->
+      <mat-list-item>
+        <mat-checkbox (change)="toggleSelectAll($event.checked)">Select All</mat-checkbox>
+      </mat-list-item>
 
-  <!-- Access permission-box -->
-  <div class="permission-box" *ngIf="selectedModule">
-    <span class="permission-heding-title">Access</span>
-    <mat-selection-list class="mdc-list-item__primary-text">
-      <mat-list-option *ngFor="let access of selectedModule.accesses">
-        {{ access.name }} <!-- Only text here -->
-      </mat-list-option>
-    </mat-selection-list>
-  </div>
+      <h3 mat-subheader>Select Menu</h3>
 
+      <mat-list-item *ngFor="let item of menuList" 
+                     [class.active]="activeMenuId === item.id" 
+                     (click)="item.type === 'group' ? toggleGroup(item.id) : selectMenuItem(item.id)">
+        <!-- Group (Expandable) -->
+        <ng-container *ngIf="item.type === 'group'">
+          <mat-checkbox [(ngModel)]="item.isSelect" (change)="toggleGroupSelect(item)"></mat-checkbox>
+          <span>{{ item.title }}</span>
+        </ng-container>
+
+        <!-- Item (Regular) -->
+        <ng-container *ngIf="item.type === 'item'">
+          <mat-checkbox [(ngModel)]="item.isSelect"></mat-checkbox>
+          <span>{{ item.title }}</span>
+        </ng-container>
+
+        <!-- Permissions Checkboxes -->
+        <mat-checkbox *ngIf="item.type === 'item'" [(ngModel)]="item.isAdd">Add</mat-checkbox>
+        <mat-checkbox *ngIf="item.type === 'item'" [(ngModel)]="item.isView">View</mat-checkbox>
+        <mat-checkbox *ngIf="item.type === 'item'" [(ngModel)]="item.isEdit">Edit</mat-checkbox>
+      </mat-list-item>
+
+  
+    </mat-list>
+  </div>
+      <!-- Child items when a group is selected -->
+      <div  *ngFor="let item of menuList">
+        <div  class="child-menu-container "*ngIf="item.type === 'group' && expandedGroupId === item.id">
+        <mat-list >
+          <h4 mat-subheader>{{ item.title }} (Group)</h4>
+          <mat-list-item *ngFor="let child of item.children" [class.active]="activeMenuId === child.id" (click)="selectMenuItem(child.id)">
+            <mat-checkbox [(ngModel)]="child.isSelect"></mat-checkbox>
+            <span>{{ child.title }}</span>
+
+            <mat-checkbox [(ngModel)]="child.isAdd">Add</mat-checkbox>
+            <mat-checkbox [(ngModel)]="child.isView">View</mat-checkbox>
+            <mat-checkbox [(ngModel)]="child.isEdit">Edit</mat-checkbox>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
 </div>

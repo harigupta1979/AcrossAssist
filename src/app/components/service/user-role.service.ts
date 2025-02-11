@@ -40,6 +40,21 @@ async GetRoleList(obj: any) {
             }
         );
 }
+async GetRoleMenu(obj: any) {
+    Date.prototype.toISOString = function () {
+        return moment(this).format("YYYY-MM-DD");
+    }
+    var body = JSON.stringify(obj);
+    return await this.http.post(environment.apibaseUrl + "role/GetRoleMenu", body, this.httpOptions).toPromise
+        ().then(
+            res => {
+                return res;
+            },
+            msg => {
+                return null;
+            }
+        );
+}
 
 
 }

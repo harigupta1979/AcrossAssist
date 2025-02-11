@@ -25,7 +25,7 @@ export class dbCommonService {
     return localStorage.getItem('JwtToken') || ''; // Retrieve the token from storage
   }
   
-  async GetSelection(Condition: string, FilterId3: string, FilterId: number, FilterId2: number) {
+  async GetSelection(Condition: string|null, FilterId3: string|null, FilterId: number|null, FilterId2: number|null) {
 
     const seletctionModel2 = {
       Condition: Condition,
