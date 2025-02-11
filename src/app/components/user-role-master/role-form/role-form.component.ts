@@ -34,6 +34,7 @@ export class RoleFormComponent {
   selectedModule: Module | null = null;
   selectedRole: Role | null = null;
   roles: any[] = [];
+  pagemode:string='Add'
   reportingRoles: any[] = [];
   submitted = false;
   selectedArray: any = [];
@@ -48,12 +49,20 @@ export class RoleFormComponent {
   ngOnInit(): void {
     this.roleFrom();
     this.getrole();
+   if (this.data.role.RoleId != null) {debugger
+          this.pagemode='Edit'
+          for (let i in this.roleForm.controls) {
+            this.roleForm.controls[i].setValue(this.data.role[i]);
+          }     
+    }
+    console.log(this.roleForm)
+   
   }
   roleFrom() {
     this.roleForm = this.fb.group({
       RoleId: [null],
       RoleName: ['', Validators.required],
-      reportingRole: ['', Validators.required],
+      RoleParentId: [null],
       RoleDesc: ['', Validators.maxLength(500)],
       IsActive: [true, Validators.required],
       CreatedBy: [localStorage.getItem('UserId')],

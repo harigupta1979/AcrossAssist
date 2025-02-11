@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { MaterialModule } from '../../shared/material.module';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-daynamic-side-nav',

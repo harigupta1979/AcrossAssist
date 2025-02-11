@@ -2,7 +2,7 @@
 <div class="role-main-container">
   <div class="role-head-container">
     <h1 mat-dialog-title class="header">
-      <span>Add Role</span>
+      <span>{{pagemode}} Role</span>
     </h1>
     <button mat-icon-button (click)="closeDialog(false)">
       <mat-icon>close</mat-icon>
@@ -20,7 +20,8 @@
 
         <mat-form-field class="form-field" appearance="outline">
           <mat-label>Reporting Role</mat-label>
-          <mat-select formControlName="reportingRole">
+          <mat-select formControlName="RoleParentId">
+            <mat-option [value]="null">Select Reporting Role</mat-option>
             <mat-option *ngFor="let role of reportingRoles" [value]="role.ID">
               {{ role.NAME }}
             </mat-option>
@@ -50,7 +51,7 @@
           Cancel
         </button>
         <button mat-raised-button color="primary" type="submit" [disabled]="roleForm.invalid">
-          Save
+         {{ pagemode === 'Edit' ? 'Update' : 'Save' }} 
         </button>
       </div>
     </form>

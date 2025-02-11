@@ -4,6 +4,8 @@ import { dbUserRoleService } from '../../service/user-role.service';
 import { dbCommonService } from '../../service/commonservice.service';
 import { MatButtonModule } from '@angular/material/button';
 import moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { RoleFormComponent } from '../role-form/role-form.component';
 
 @Component({
   selector: 'app-role-master',
@@ -14,7 +16,8 @@ import moment from 'moment';
 export class RoleMasterComponent {
   constructor(
     private service: dbUserRoleService,
-    private sharedservice: dbCommonService
+    private sharedservice: dbCommonService,
+    private dialog: MatDialog
   ) {}
 
   async ngOnInit() {
@@ -28,6 +31,7 @@ export class RoleMasterComponent {
   displayedColumns: string[] = [
     'RoleName',
     'RoleDesc',
+    'ReportingRole',
     'createdDate',
     'status',
     'action',
@@ -40,19 +44,40 @@ export class RoleMasterComponent {
     console.log('API Response:', dataobj);
     if (dataobj && dataobj['Data']) {
       this.dataSource = dataobj['Data'].map((item: any) => {
-        let parsedDate = item.CREATED_DATE ? new Date(item.CREATED_DATE) : null;
+        let parsedDate = item.CreatedAt ? new Date(item.CreatedAt) : null;
         // console.log('Raw Date from API:', item.CREATED_DATE);
         // console.log('Parsed Date:', parsedDate);
         return {
-          RoleName: item.NAME,
+          RoleName: item.RoleName,
           RoleDesc: item.DESCRIPTION,
-          createdDate: parsedDate,
+          CreatedDate: item.CreatedAt,
           IsActive: item.IS_ACTIVE ? 'Active' : 'Inactive',
         };
       });
     }
   }
-
+  editRole(role: any) {
+    console.log('Editing Role:', role);
+    this.dialog
+    .open(RoleFormComponent, {
+      width: '500px',
+      disableClose: true,
+      data: {role},
+      position: {
+        right: '0px',
+        top: '50px',
+      },
+    })
+    .afterClosed()
+    .subscribe((result: { success: boolean }) => {
+      if (result && result.success) {
+        console.log('Role added successfully:', result);
+      }
+      this.getrollist();
+    });
+   
+    // Your logic to edit the role
+  }
   async getrollist() {
     const obj = {
       RoleName: null,
