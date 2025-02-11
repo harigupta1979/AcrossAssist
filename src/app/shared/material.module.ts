@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 // Angular Material Modules
 import { MatButtonModule } from '@angular/material/button';
@@ -21,8 +22,15 @@ import {
   MatButtonToggleGroup,
   MatButtonToggleModule,
 } from '@angular/material/button-toggle';
-
+import { MatRadioModule } from '@angular/material/radio';
 import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -45,20 +53,27 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule,
     MatButtonToggleModule,
     MatButtonToggleGroup,
+    MatSelectModule,
+    MatCardModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogContent,
+    MatDialogTitle,
+    MatButtonModule,
   ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
-    MatButtonModule,
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
@@ -68,6 +83,15 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule,
     MatButtonToggleModule,
     MatButtonToggleGroup,
+    MatSelectModule,
+    MatCardModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogContent,
+    MatDialogTitle,
+    MatButtonModule,
   ],
 })
 export class MaterialModule {}

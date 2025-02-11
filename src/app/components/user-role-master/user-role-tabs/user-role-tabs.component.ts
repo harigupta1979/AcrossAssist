@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MaterialModule } from '../../../shared/material.module';
 import {
   ActivatedRoute,
@@ -8,6 +8,9 @@ import {
 } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
+import { UserFromComponent } from '../user-from/user-from.component';
+import { RoleFormComponent } from '../role-form/role-form.component';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-user-role-tabs',
@@ -18,12 +21,18 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class UserRoleTabsComponent {
   selectedTabIndex = 0;
-  isSaveVisible = false;
+  isSidePanelOpen = false;
   selectedPermission: any = null;
   selectedRole: any = null;
   selectedModule: any = null;
-
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  isDrawerOpen = false;
+  isSaveVisible = true;
+  drawerTitle: any;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
@@ -56,13 +65,55 @@ export class UserRoleTabsComponent {
     this.router.navigate([routes[index]], { relativeTo: this.route });
     this.selectedTabIndex = index;
     this.isSaveVisible = false;
+    ('');
   }
   onPermissionSelect(permission: any) {
     this.selectedPermission = permission;
-    this.isSaveVisible = true; // Show Save button when an option is selected
+    this.isSaveVisible = true;
+  }
+
+  openUserForm(): void {
+    this.dialog
+      .open(UserFromComponent, {
+        width: '500px',
+        disableClose: true,
+        data: {
+          /* Data passed to the dialog */
+        },
+        position: {
+          right: '0px',
+          top: '50px',
+        },
+      })
+      .afterClosed()
+      .subscribe((result: { success: boolean }) => {
+        if (result && result.success) {
+          console.log('User added successfully:', result);
+        }
+      });
+  }
+
+  openRoleForm(): void {
+    this.dialog
+      .open(RoleFormComponent, {
+        width: '500px',
+        disableClose: true,
+        data: {},
+        position: {
+          right: '0px',
+          top: '50px',
+        },
+      })
+      .afterClosed()
+      .subscribe((result: { success: boolean }) => {
+        if (result && result.success) {
+          console.log('Role added successfully:', result);
+        }
+      });
   }
 
   savePermissions() {
     this.isSaveVisible = false;
   }
+  closeDrawer() {}
 }

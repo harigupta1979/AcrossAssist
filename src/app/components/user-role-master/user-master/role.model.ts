@@ -15,3 +15,8 @@ export interface Role {
   name: string;
   modules: Module[];
 }
+
+interface RoleResponse {
+  FinalMode?: string; // "INSERT" or "UPDATE"
+  Message?: string | null;
+}

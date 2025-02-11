@@ -1,0 +1,54 @@
+.user-main-container {
+  width: 100%;
+  overflow: visible;
+  height: fit-content;
+}
+.user-head-container {
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+}
+.user-heading {
+  font-size: 14px;
+  text-align: center;
+  padding: 25px;
+}
+.role-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.form-row-first,
+.form-row,
+.form-row-last {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px; /* Adds space between the form fields */
+  margin-bottom: 16px; /* Adds space between the rows */
+  width: 100%;
+}
+
+.form-row-first .form-field,
+.form-row .form-field {
+  width: 48%; /* Makes the form fields take up 48% of the row */
+}
+
+.form-row-first {
+  padding: 10px 0;
+}
+
+.form-row .form-field {
+  width: 48%; /* Same as above to ensure consistency */
+}
+
+.form-row-last {
+  width: 100%;
+  padding-top: 20px; /* Add some padding to the last row */
+}
+
+button {
+  margin-top: 20px; /* Adds space above the submit button */
+}

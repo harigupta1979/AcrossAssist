@@ -38,7 +38,7 @@ export class PermissionsMasterComponent {
     if (dataobj && dataobj['Data']) {
       this.roles = dataobj['Data'].map((item: any) => ({
         RoleName: item.NAME,
-        RoleId:item.ID
+        RoleId: item.ID,
       }));
     }
   }
@@ -50,21 +50,21 @@ export class PermissionsMasterComponent {
     this.selectedRole = role;
     this.selectedModule = null;
     this.getRoleMenu();
-
+    console.log(role, 'rolename');
   }
   async getRoleMenu() {
     const obj = {
       RoleId: this.selectedRole,
-      Mode:"E"
+      Mode: 'E',
     };
-    const data: Record<string, any> | null | undefined = await this.service.GetRoleMenu(obj);
+    const data: Record<string, any> | null | undefined =
+      await this.service.GetRoleMenu(obj);
     //console.log(data, 'rolename');
 
     if (data && data['Data']) {
-      this.menuList= JSON.parse(data['Data'][0].menu);//Property 'Data' does not exist on type 'Object'.ts(2339)
+      this.menuList = JSON.parse(data['Data'][0].menu); //Property 'Data' does not exist on type 'Object'.ts(2339)
       console.log(this.menuList, 'rolename');
     } else {
-      
     }
   }
   selectModule(module: Module) {
@@ -74,7 +74,6 @@ export class PermissionsMasterComponent {
   selectPermission(permission: any) {
     this.permissionSelected.emit(permission); // Emit the selected permission
   }
-
 
   onParentSelect(menuItem: any) {
     menuItem.children?.forEach((child: any) => {
@@ -93,18 +92,20 @@ export class PermissionsMasterComponent {
     this.expandedMenus[menuId] = !this.expandedMenus[menuId];
   }
   toggleChild(parentId: number): void {
-    const parent = this.menuList.find(menu => menu.id === parentId);
-    
-    this.expandedMenus[parentId] = parent?.children?.some((child: { isEdit: boolean; isView: boolean; isAdd: boolean }) => 
-      child.isEdit || child.isView || child.isAdd
-    ) || false;
-  
+    const parent = this.menuList.find((menu) => menu.id === parentId);
+
+    this.expandedMenus[parentId] =
+      parent?.children?.some(
+        (child: { isEdit: boolean; isView: boolean; isAdd: boolean }) =>
+          child.isEdit || child.isView || child.isAdd
+      ) || false;
+
     // Auto-collapse if no child is selected
     if (!this.expandedMenus[parentId]) {
       setTimeout(() => (this.expandedMenus[parentId] = false), 300);
     }
   }
-  
+
   toggleParent(menu: any) {
     console.log('Parent updated:', menu);
   }
@@ -116,12 +117,19 @@ export class PermissionsMasterComponent {
       item.isView = selectAll;
 
       if (item.type === 'group' && item.children) {
-        item.children.forEach((child: { isEdit: boolean; isView: boolean; isAdd: boolean,isSelect: boolean }) => {
-          child.isSelect = selectAll;
-          child.isAdd = selectAll;
-          child.isEdit = selectAll;
-          child.isView = selectAll;
-        });
+        item.children.forEach(
+          (child: {
+            isEdit: boolean;
+            isView: boolean;
+            isAdd: boolean;
+            isSelect: boolean;
+          }) => {
+            child.isSelect = selectAll;
+            child.isAdd = selectAll;
+            child.isEdit = selectAll;
+            child.isView = selectAll;
+          }
+        );
       }
     });
   }
@@ -135,7 +143,7 @@ export class PermissionsMasterComponent {
       child.isView = group.isSelect;
     });
   }
- 
+
   toggleGroup(groupId: number) {
     this.expandedGroupId = this.expandedGroupId === groupId ? null : groupId;
     this.activeMenuId = groupId;

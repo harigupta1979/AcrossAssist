@@ -1,0 +1,92 @@
+<div class="user-main-container">
+  <div class="user-head-container">
+    <h1 mat-dialog-title class="header">
+      <span class="user-heading">Add User</span>
+    </h1>
+    <button mat-icon-button (click)="closeDialog(false)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="uer-form-conatiner">
+    <div class="role-form-container">
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <!-- Next Row: First Name, Last Name -->
+        <div class="form-row-first">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" />
+          </mat-form-field>
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" />
+          </mat-form-field>
+        </div>
+
+        <!-- Next Row: Mobile No, Email -->
+        <div class="form-row">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Mobile No</mat-label>
+            <input matInput formControlName="mobileNo" />
+          </mat-form-field>
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Email ID</mat-label>
+            <input matInput formControlName="emailId" />
+          </mat-form-field>
+        </div>
+
+        <!-- Next Row: DOB, Pin Code -->
+        <div class="form-row">
+          <!-- <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field> -->
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Pin Code</mat-label>
+            <input matInput formControlName="pinCode" />
+          </mat-form-field>
+        </div>
+
+        <!-- Next Row: City, State -->
+        <div class="form-row">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>City</mat-label>
+            <mat-select formControlName="city">
+              <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>State</mat-label>
+            <mat-select formControlName="state">
+              <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Next Row: Role Reporting -->
+        <div class="form-row">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Role Reporting To</mat-label>
+            <mat-select formControlName="reportingTo">
+              <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Last Row: Active / Inactive Radio Buttons -->
+        <div class="form-row">
+          <mat-radio-group formControlName="status">
+            <mat-radio-button value="active">Active</mat-radio-button>
+            <mat-radio-button value="inactive">Inactive</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
