@@ -55,6 +55,20 @@ async GetRoleMenu(obj: any) {
             }
         );
 }
-
+async PostRoleMenuMappinging(obj: any) {
+    Date.prototype.toISOString = function () {
+        return moment(this).format("YYYY-MM-DD");
+    }
+    var body = JSON.stringify(obj);
+    return await this.http.post(environment.apibaseUrl + "role/PostRoleMenuMappinging", body, this.httpOptions).toPromise
+        ().then(
+            res => {
+                return res;
+            },
+            msg => {
+                return null;
+            }
+        );
+}
 
 }

@@ -10,7 +10,7 @@
   </div>
 
   <!-- Modules Box -->
-  <div class="menu-container">
+  <div class="menu-container" *ngIf="menuList.length>0">
     <mat-list>
       <!-- Select All -->
       <mat-list-item>
@@ -30,7 +30,7 @@
 
         <!-- Item (Regular) -->
         <ng-container *ngIf="item.type === 'item'">
-          <mat-checkbox [(ngModel)]="item.isSelect"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="item.isSelect" (change)="toggleitemSelect(item)"></mat-checkbox>
           <span>{{ item.title }}</span>
         </ng-container>
 
@@ -49,7 +49,7 @@
         <mat-list >
           <h4 mat-subheader>{{ item.title }} (Group)</h4>
           <mat-list-item *ngFor="let child of item.children" [class.active]="activeMenuId === child.id" (click)="selectMenuItem(child.id)">
-            <mat-checkbox [(ngModel)]="child.isSelect"></mat-checkbox>
+            <mat-checkbox [(ngModel)]="child.isSelect" (change)="toggleitemSelect(child)"></mat-checkbox>
             <span>{{ child.title }}</span>
 
             <mat-checkbox [(ngModel)]="child.isAdd">Add</mat-checkbox>
@@ -60,3 +60,4 @@
       </div>
     </div>
 </div>
+<button  (click)="savePermissions()" [disabled]="!selectedRole">Save</button>
