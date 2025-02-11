@@ -18,9 +18,9 @@ export class PermissionsMasterComponent {
   selectedModule: Module | null = null;
   @Output() permissionSelected = new EventEmitter<void>();
   expandedMenus: { [key: number]: boolean } = {};
-  expandedGroups: Set<number> = new Set(); // Track expanded groups by ID
   activeMenuId: number | null = null; // Track which menu item is active
-
+  CreatedBy: number | null = null;
+  UpdatedBy: number | null = null;
   expandedGroupId: number | null = null; // Track which group is expanded
   constructor(
     private service: dbUserRoleService,
@@ -30,7 +30,14 @@ export class PermissionsMasterComponent {
   async ngOnInit() {
     await this.getrole();
   }
-
+  onaddnew() {
+    this.activeMenuId = null;
+    this.expandedGroupId = null;
+  }
+  onPageLoad(): void {
+    this.CreatedBy = Number(localStorage.getItem('UserId'));
+    this.UpdatedBy = Number(localStorage.getItem('UserId'));
+  }
   async getrole() {
     let dataobj: Record<string, any> | null | undefined =
       await this.sharedservice.GetSelection('role', null, null, null);
@@ -42,10 +49,7 @@ export class PermissionsMasterComponent {
       }));
     }
   }
-  toggleSelection(item: any) {
-    item.isSelect = !item.isSelect;
-    console.log('Updated Selection:', this.menuList);
-  }
+
   onRoleSelect(role: Role) {
     this.selectedRole = role;
     this.selectedModule = null;
@@ -53,6 +57,7 @@ export class PermissionsMasterComponent {
     console.log(role, 'rolename');
   }
   async getRoleMenu() {
+    this.onaddnew();
     const obj = {
       RoleId: this.selectedRole,
       Mode: 'E',
@@ -67,48 +72,7 @@ export class PermissionsMasterComponent {
     } else {
     }
   }
-  selectModule(module: Module) {
-    this.selectedModule = module;
-    this.permissionSelected.emit();
-  }
-  selectPermission(permission: any) {
-    this.permissionSelected.emit(permission); // Emit the selected permission
-  }
 
-  onParentSelect(menuItem: any) {
-    menuItem.children?.forEach((child: any) => {
-      child.isSelect = menuItem.isSelect;
-    });
-  }
-
-  onChildSelect(parent: any) {
-    parent.isSelect = parent.children.every((child: any) => child.isSelect);
-  }
-
-  isExpanded(menuId: number): boolean {
-    return this.expandedMenus[menuId] || false;
-  }
-  toggleExpand(menuId: number): void {
-    this.expandedMenus[menuId] = !this.expandedMenus[menuId];
-  }
-  toggleChild(parentId: number): void {
-    const parent = this.menuList.find((menu) => menu.id === parentId);
-
-    this.expandedMenus[parentId] =
-      parent?.children?.some(
-        (child: { isEdit: boolean; isView: boolean; isAdd: boolean }) =>
-          child.isEdit || child.isView || child.isAdd
-      ) || false;
-
-    // Auto-collapse if no child is selected
-    if (!this.expandedMenus[parentId]) {
-      setTimeout(() => (this.expandedMenus[parentId] = false), 300);
-    }
-  }
-
-  toggleParent(menu: any) {
-    console.log('Parent updated:', menu);
-  }
   toggleSelectAll(selectAll: boolean) {
     this.menuList.forEach((item) => {
       item.isSelect = selectAll;
@@ -142,17 +106,102 @@ export class PermissionsMasterComponent {
       child.isEdit = group.isSelect;
       child.isView = group.isSelect;
     });
+    group.isSelect = group.isSelect;
+    group.isAdd = group.isSelect;
+    group.isEdit = group.isSelect;
+    group.isView = group.isSelect;
   }
 
+  toggleitemSelect(item: any) {
+    item.isSelect = item.isSelect;
+    item.isAdd = item.isSelect;
+    item.isEdit = item.isSelect;
+    item.isView = item.isSelect;
+    const parentGroup = this.menuList.find(
+      (group) =>
+        group.type === 'group' &&
+        group.children?.some((child: { id: any }) => child.id === item.id)
+    );
+
+    if (parentGroup) {
+      // If any child is selected, select the parent group
+      parentGroup.isSelect = parentGroup.children.some(
+        (child: { isSelect: any }) => child.isSelect
+      );
+    }
+  }
   toggleGroup(groupId: number) {
     this.expandedGroupId = this.expandedGroupId === groupId ? null : groupId;
     this.activeMenuId = groupId;
   }
 
-  isGroupExpanded(groupId: number): boolean {
-    return this.expandedGroups.has(groupId);
-  }
   selectMenuItem(menuId: number) {
     this.activeMenuId = menuId;
+  }
+
+  extractSelectedMenus() {
+    debugger;
+    let selectedMenus: any[] = [];
+
+    function traverse(menu: any) {
+      if (menu.isSelect === 1 || menu.isSelect) {
+        selectedMenus.push({
+          MenuId: menu.id,
+          IsAdd: menu.isAdd ? 1 : 0,
+          IsEdit: menu.isEdit ? 1 : 0,
+          IsView: menu.isView ? 1 : 0,
+        });
+      }
+
+      if (menu.children && menu.children.length) {
+        menu.children.forEach(traverse);
+      }
+    }
+
+    // Loop through the main menu list
+    for (const menu of this.menuList) {
+      traverse(menu);
+    }
+
+    console.log(selectedMenus);
+    return selectedMenus;
+  }
+
+  async savePermissions() {
+    const selectedMenus = await this.extractSelectedMenus();
+    const obj = {
+      RoleId: this.selectedRole,
+      CreatedBy: this.CreatedBy,
+      UpdatedBy: this.UpdatedBy,
+      MenuId: JSON.stringify(selectedMenus),
+    };
+    let data: any = await this.service.PostRoleMenuMappinging(obj);
+    if (data['FinalMode'] == 'DUPLICATE') {
+      // this.toastr.warning(data['Message'] , ' ',{
+      //   disableTimeOut: true,
+      //   tapToDismiss: false,
+      //   toastClass: "toast border-yellow",
+      //   closeButton:true,
+      //   positionClass:'top-center',
+      // });
+      alert(data['Message']);
+      //this.getRoleMenu();
+    } else if (
+      (data['FinalMode'] == 'INSERT' || data['FinalMode'] == 'UPDATE') &&
+      data['Message'] != null
+    ) {
+      // this.toastr.success(data['Message'] , ' ',{
+      //   disableTimeOut: true,
+      //   tapToDismiss: false,
+      //   toastClass: "toast border-green",
+      //   closeButton:true,
+      //   positionClass:'top-center',
+      // });
+      alert(data['Message']);
+      this.getRoleMenu();
+    }
+
+    console.log(this.menuList, 'menulistonsave');
+    console.log(selectedMenus, 'selected menus on save');
   }
 }
