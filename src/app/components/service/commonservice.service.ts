@@ -44,6 +44,20 @@ export class dbCommonService {
         }
       );
   }
-
+  async GetSelectionDetailsByLocation(FilterId: any) {
+    const seletctionModel = {
+      StateId: FilterId
+    }
+    var body = JSON.stringify(seletctionModel);
+    return await this.http.post(environment.apibaseUrl + "DropdownSelection/GetLocationByPinCode", body, this.httpOptions).toPromise
+      ().then(
+        res => {
+          return res;
+        },
+        msg => {
+          return null;
+        }
+      );
+  }
 
 }
