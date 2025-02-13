@@ -51,9 +51,12 @@ export class RoleFormComponent {
     this.roleFrom();
     this.getrole();
     if (this.data.role.RoleId != null) {
-      this.pagemode = 'Edit';
+      this.pagemode = this.data.pageMode;
       for (let i in this.roleForm.controls) {
         this.roleForm.controls[i].setValue(this.data.role[i]);
+      }
+      if (this.pagemode === 'View') {
+        this.roleForm.disable(); // This will make all form fields readonly
       }
     }
     console.log(this.roleForm);

@@ -18,9 +18,9 @@
           <input matInput formControlName="RoleName" />
         </mat-form-field>
 
-        <mat-form-field class="form-field" appearance="outline">
+        <mat-form-field class="form-field" appearance="outline" >
           <mat-label>Reporting Role</mat-label>
-          <mat-select formControlName="ReportingPersonId">
+          <mat-select formControlName="ReportingPersonId" [disabled]="pagemode === 'View'">
             <mat-option [value]="null">Select Reporting Role</mat-option>
             <mat-option *ngFor="let role of reportingRoles" [value]="role.ID">
               {{ role.NAME }}
@@ -44,7 +44,7 @@
       </div>
 
       <!-- Submit Button -->
-      <div class="form-row-button">
+      <div class="form-row-button" *ngIf="pagemode !== 'View'">
         <button mat-raised-button color="primary" type="submit" [disabled]="roleForm.invalid">
           Cancel
         </button>

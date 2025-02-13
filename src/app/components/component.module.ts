@@ -14,6 +14,11 @@ export const baseRoutes: Routes =[
       component: UserRoleTabsComponent,
       loadChildren: () => import('./user-role-master/user-role-master.module').then(m => m.UserRoleModule) 
      },
+     {
+      path: 'vendor',
+      loadChildren: () => import('./vendormaster/vendormaster.module').then(m => m.VendormasterModule) 
+     },
+     
    
   ]
 

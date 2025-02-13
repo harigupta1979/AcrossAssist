@@ -64,13 +64,13 @@ export class RoleMasterComponent {
       });
     }
   }
-  editRole(role: any) {
+  editRole(role: any,mode:string) {
     console.log('Editing Role:', role);
     this.dialog
       .open(RoleFormComponent, {
         width: '500px',
         disableClose: true,
-        data: { role },
+        data: { role ,pageMode:mode},
         position: {
           right: '0px',
           top: '50px',

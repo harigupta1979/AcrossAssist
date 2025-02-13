@@ -42,9 +42,9 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="editRole(element)">View</button>
-          <button mat-menu-item (click)="editRole(element)">Edit</button>
-          <button mat-menu-item >Delete</button>
+          <button mat-menu-item (click)="editRole(element,'View')">View</button>
+          <button mat-menu-item (click)="editRole(element,'Edit')">Edit</button>
+          <!-- <button mat-menu-item >Delete</button> -->
         </mat-menu>
       </td>
     </ng-container>
