@@ -3,7 +3,7 @@ import { MaterialModule } from '../../../shared/material.module';
 import { dbUserRoleService } from '../../service/user-role.service';
 import { dbCommonService } from '../../service/commonservice.service';
 import { MatButtonModule } from '@angular/material/button';
-import moment from 'moment';
+
 import { MatDialog } from '@angular/material/dialog';
 import { RoleFormComponent } from '../role-form/role-form.component';
 
@@ -50,7 +50,7 @@ export class RoleMasterComponent {
         return {
           RoleName: item.RoleName,
           RoleDesc: item.DESCRIPTION,
-          CreatedDate: item.CreatedAt,
+          createdDate: item.CreatedAt,
           IsActive: item.IS_ACTIVE ? 'Active' : 'Inactive',
         };
       });
@@ -59,23 +59,23 @@ export class RoleMasterComponent {
   editRole(role: any) {
     console.log('Editing Role:', role);
     this.dialog
-    .open(RoleFormComponent, {
-      width: '500px',
-      disableClose: true,
-      data: {role},
-      position: {
-        right: '0px',
-        top: '50px',
-      },
-    })
-    .afterClosed()
-    .subscribe((result: { success: boolean }) => {
-      if (result && result.success) {
-        console.log('Role added successfully:', result);
-      }
-      this.getrollist();
-    });
-   
+      .open(RoleFormComponent, {
+        width: '500px',
+        disableClose: true,
+        data: { role },
+        position: {
+          right: '0px',
+          top: '50px',
+        },
+      })
+      .afterClosed()
+      .subscribe((result: { success: boolean }) => {
+        if (result && result.success) {
+          console.log('Role added successfully:', result);
+        }
+        this.getrollist();
+      });
+
     // Your logic to edit the role
   }
   async getrollist() {

@@ -74,3 +74,21 @@ td {
 .mat-mdc-dialog-surface {
   border-radius: 0 !important;
 }
+/* Removes focus outline and shadows */
+.mat-focus-indicator {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Also remove focus from mat-button, mat-icon-button, mat-form-field */
+button:focus,
+.mat-icon-button:focus,
+.mat-button:focus,
+mat-form-field:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.mdc-text-field--outlined {
+  height: 55px !important;
+  font-size: 14px;
+}

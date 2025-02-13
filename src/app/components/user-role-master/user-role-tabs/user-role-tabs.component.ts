@@ -76,6 +76,7 @@ export class UserRoleTabsComponent {
     this.dialog
       .open(UserFromComponent, {
         width: '500px',
+        maxHeight: '90vh',
         disableClose: true,
         data: {
           /* Data passed to the dialog */
@@ -84,6 +85,7 @@ export class UserRoleTabsComponent {
           right: '0px',
           top: '50px',
         },
+        panelClass: 'custom-dialog-container',
       })
       .afterClosed()
       .subscribe((result: { success: boolean }) => {

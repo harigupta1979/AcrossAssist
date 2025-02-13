@@ -34,7 +34,7 @@ export class RoleFormComponent {
   selectedModule: Module | null = null;
   selectedRole: Role | null = null;
   roles: any[] = [];
-  pagemode:string='Add'
+  pagemode: string = 'Add';
   reportingRoles: any[] = [];
   submitted = false;
   selectedArray: any = [];
@@ -43,20 +43,19 @@ export class RoleFormComponent {
     private toastr: ToastService,
     public dialogRef: MatDialogRef<RoleFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dbService: dbUserRoleService,
+    private dbService: dbRoleMenuMappingService,
     private sharedservice: dbCommonService
   ) {}
   ngOnInit(): void {
     this.roleFrom();
     this.getrole();
-   if (this.data.role.RoleId != null) {debugger
-          this.pagemode='Edit'
-          for (let i in this.roleForm.controls) {
-            this.roleForm.controls[i].setValue(this.data.role[i]);
-          }     
+    if (this.data.role.RoleId != null) {
+      this.pagemode = 'Edit';
+      for (let i in this.roleForm.controls) {
+        this.roleForm.controls[i].setValue(this.data.role[i]);
+      }
     }
-    console.log(this.roleForm)
-   
+    console.log(this.roleForm);
   }
   roleFrom() {
     this.roleForm = this.fb.group({
@@ -90,7 +89,6 @@ export class RoleFormComponent {
   }
 
   async onSubmit(): Promise<void> {
-    debugger;
     this.submitted = true;
 
     if (this.roleForm.invalid) {
@@ -106,20 +104,21 @@ export class RoleFormComponent {
         response &&
         (response.FinalMode === 'INSERT' || response.FinalMode === 'UPDATE')
       ) {
-        this.toastr.success(
+        this.toastr.showSuccess(
           response.Message || 'Role saved successfully!',
           'Role'
         );
         // await this.addNew();
         this.closeDialog(true);
       } else {
-        this.toastr.error(response?.Message || 'Error saving role!', 'Role');
+        this.toastr.showError(
+          response?.Message || 'Error saving role!',
+          'Role'
+        );
       }
     } catch (error) {
       console.error('Error during onSubmit:', error);
-      this.toastr.error('An error occurred while saving the role.', 'Role');
+      this.toastr.showError('An error occurred while saving the role.', 'Role');
     }
-
-    // this.sharedservice.spinner(false);
   }
 }

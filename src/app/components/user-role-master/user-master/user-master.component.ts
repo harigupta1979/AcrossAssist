@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { dbUserRoleService } from '../../service/user-role.service';
 import { MaterialModule } from '../../../shared/material.module';
+import { dbRoleMenuMappingService } from '../../../Services/rolemenumapping.service';
 
 @Component({
   selector: 'app-user-master',
@@ -8,7 +13,6 @@ import { MaterialModule } from '../../../shared/material.module';
   styleUrl: './user-master.component.css',
 })
 export class UserMasterComponent {
-  // Define columns to be displayed
   displayedColumns: string[] = [
     'name',
     'role',
@@ -16,30 +20,36 @@ export class UserMasterComponent {
     'contactNumber',
     'email',
     'createdDate',
-    'status',
+    'Status',
     'action',
   ];
 
-  // Sample data for the table
-  dataSource = [
-    {
-      name: 'John Doe',
-      role: 'Admin',
-      reportingPerson: 'N/A',
-      contactNumber: '123-456-7890',
-      email: 'john.doe@example.com',
-      createdDate: new Date('2022-01-01'),
-      status: 'Active',
-    },
-    {
-      name: 'Jane Smith',
-      role: 'Manager',
-      reportingPerson: 'John Doe',
-      contactNumber: '098-765-4321',
-      email: 'jane.smith@example.com',
-      createdDate: new Date('2022-02-01'),
-      status: 'Inactive',
-    },
-    // Add more sample data here
-  ];
+  dataSource = new MatTableDataSource<any>([]);
+  resultCount: number = 0;
+  dataLength: boolean = true;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private dbUserService: dbRoleMenuMappingService) {}
+
+  async ngOnInit() {
+    await this.getUser();
+  }
+  async getUser() {
+    let dataobj: Record<string, any> | null | undefined =
+      await this.dbUserService.GetServiceUser({});
+
+    if (dataobj && dataobj['Data']) {
+      this.dataSource = dataobj['Data'].map((item: any) => ({
+        UserName: `${item.FirstName} ${item.LastName}`,
+        EmailAddress: item.EmailAddress,
+        Role: item.RoleName,
+        ReportingPersonName: item.ReportingPersonName,
+        ContactNo: item.ContactNo,
+        createdDate: item.CreatedAt || 'N/A',
+        Status: item.IsActive ? 'Active' : 'Inactive',
+      }));
+    }
+  }
 }

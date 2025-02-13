@@ -140,7 +140,6 @@ export class PermissionsMasterComponent {
   }
 
   extractSelectedMenus() {
-    debugger;
     let selectedMenus: any[] = [];
 
     function traverse(menu: any) {

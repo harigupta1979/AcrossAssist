@@ -7,31 +7,39 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ToastService {
   constructor(private snackBar: MatSnackBar) {}
 
-  success(message: string, action: string = 'OK') {
+  showSuccess(message: string, action: string = 'OK') {
     this.snackBar.open(message, action, {
       duration: 3000,
-      panelClass: ['success-snackbar'],
+      panelClass: ['success-snackbar'], // ✅ Green Success Style
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
     });
   }
 
-  error(message: string, action: string = 'OK') {
+  showError(message: string, action: string = 'OK') {
     this.snackBar.open(message, action, {
       duration: 3000,
-      panelClass: ['error-snackbar'],
+      panelClass: ['error-snackbar'], // ✅ Red Error Style
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
     });
   }
 
-  info(message: string, action: string = 'OK') {
+  showWarning(message: string, action: string = 'OK') {
     this.snackBar.open(message, action, {
       duration: 3000,
-      panelClass: ['info-snackbar'],
+      panelClass: ['warn-snackbar'], // ✅ Yellow Warning Style
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
     });
   }
 
-  warn(message: string, action: string = 'OK') {
+  showInfo(message: string, action: string = 'OK') {
     this.snackBar.open(message, action, {
       duration: 3000,
-      panelClass: ['warn-snackbar'],
+      panelClass: ['info-snackbar'], // ✅ Blue Info Style
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
     });
   }
 

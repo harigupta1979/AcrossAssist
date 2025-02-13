@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 
 // Angular Material Modules
 import { MatButtonModule } from '@angular/material/button';
@@ -18,19 +17,26 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
-import {
-  MatButtonToggleGroup,
-  MatButtonToggleModule,
-} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
+// Date Adapter Modules
 import {
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogTitle,
-} from '@angular/material/dialog';
+  DateAdapter,
+  MAT_DATE_LOCALE,
+  MatNativeDateModule,
+} from '@angular/material/core';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MatMomentDateModule,
+  MomentDateAdapter,
+} from '@angular/material-moment-adapter';
+
+import { AuthService } from '../Services/auth.service';
 
 @NgModule({
   imports: [
@@ -38,6 +44,7 @@ import {
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
     MatFormFieldModule,
@@ -52,22 +59,19 @@ import {
     MatTabsModule,
     MatTableModule,
     MatButtonToggleModule,
-    MatButtonToggleGroup,
     MatSelectModule,
-    MatCardModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatDialogActions,
-    MatDialogClose,
-    MatDialogContent,
-    MatDialogTitle,
-    MatButtonModule,
+    MatDialogModule, // ✅ Corrected
+    MatNativeDateModule,
+    MatMomentDateModule,
   ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
     MatFormFieldModule,
@@ -82,16 +86,23 @@ import {
     MatTabsModule,
     MatTableModule,
     MatButtonToggleModule,
-    MatButtonToggleGroup,
     MatSelectModule,
-    MatCardModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatDialogActions,
-    MatDialogClose,
-    MatDialogContent,
-    MatDialogTitle,
-    MatButtonModule,
+    MatDialogModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
+  ],
+  providers: [
+    provideHttpClient(),
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    AuthService,
   ],
 })
 export class MaterialModule {}

@@ -10,14 +10,13 @@ import {
 } from '../models/selectionCommon.model';
 import { BehaviorSubject } from 'rxjs';
 import moment from 'moment';
+
 @Injectable({
   providedIn: 'root',
 })
 export class SharedserviceService {
   private IpAddress: string = '';
-  private seletctionModel!: seletctionModel;
   private seletctionModel2!: seletctionModel2;
-  private seletction!: seletction;
   private _dropDownCommon!: DropDowncommon;
   private messageSource = new BehaviorSubject('');
   currentMessage = this.messageSource.asObservable();
@@ -30,9 +29,14 @@ export class SharedserviceService {
 
   httpOptions = {
     headers: new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
       'Content-Type': 'application/json',
     }),
   };
+  private getToken(): string {
+    console.log(localStorage.getItem('JwtToken'), 'JwtToken');
+    return localStorage.getItem('JwtToken') || ''; // Retrieve the token from storage
+  }
   redirectTo(uri: any) {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })
@@ -40,8 +44,8 @@ export class SharedserviceService {
   }
   async GetSelectionDetails(
     Condition: string,
-    FilterId: number,
-    FilterId2: number,
+    FilterId: number | null,
+    FilterId2: number | null,
     FilterId3: string | null,
     LoginUserId: number | null = null
   ) {
@@ -153,35 +157,35 @@ export class SharedserviceService {
         }
       );
   }
-  async GetSelection(
-    Condition: string,
-    FilterId3: string,
-    FilterId: number,
-    FilterId2: number
-  ) {
-    this.seletctionModel2 = {
-      Condition: Condition,
-      FilterId: FilterId,
-      FilterId2: FilterId2,
-      FilterId3: FilterId3,
-    };
-    var body = JSON.stringify(this.seletctionModel2);
-    return await this.http
-      .post(
-        environment.apibaseUrl + 'DropdownSelection/GetSelectionAutoCmt',
-        body,
-        this.httpOptions
-      )
-      .toPromise()
-      .then(
-        (res) => {
-          return res;
-        },
-        (msg) => {
-          return null;
-        }
-      );
-  }
+  // async GetSelection(
+  //   Condition: string | null,
+  //   FilterId3: string | null,
+  //   FilterId: number | null,
+  //   FilterId2: number | null
+  // ) {
+  //   this.seletctionModel2 = {
+  //     Condition: Condition,
+  //     FilterId: FilterId,
+  //     FilterId2: FilterId2,
+  //     FilterId3: FilterId3,
+  //   };
+  //   var body = JSON.stringify(this.seletctionModel2);
+  //   return await this.http
+  //     .post(
+  //       environment.apibaseUrl + 'DropdownSelection/GetSelectionAutoCmt',
+  //       body,
+  //       this.httpOptions
+  //     )
+  //     .toPromise()
+  //     .then(
+  //       (res) => {
+  //         return res;
+  //       },
+  //       (msg) => {
+  //         return null;
+  //       }
+  //     );
+  // }
   async GetUserInfo(obj: any) {
     Date.prototype.toJSON = function () {
       return moment(this).format('YYYY-MM-DD');

@@ -6,14 +6,16 @@ import { environment } from '../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class dbRoleMenuMappingService {
   constructor(private http: HttpClient) {}
-
   httpOptions = {
     headers: new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
       'Content-Type': 'application/json',
     }),
   };
+  private getToken(): string {
+    return localStorage.getItem('JwtToken') || ''; // Retrieve the token from storage
+  }
   async PostService(obj: any) {
-    debugger;
     Date.prototype.toJSON = function () {
       return moment(this).format('YYYY-MM-DD');
     };
@@ -47,6 +49,43 @@ export class dbRoleMenuMappingService {
         }
       );
   }
+  async GetServiceUser(obj: any) {
+    Date.prototype.toJSON = function () {
+      return moment(this).format('YYYY-MM-DD');
+    };
+    var body = JSON.stringify(obj);
+    return await this.http
+      .post(environment.apibaseUrl + 'user/GetUser', body, this.httpOptions)
+      .toPromise()
+      .then(
+        (res) => {
+          return res;
+        },
+        (msg) => {
+          return null;
+        }
+      );
+  }
+  async PostServiceUser(obj: any) {
+    obj.RoleId = obj.RoleId == null ? null : obj.RoleId.toString();
+    Date.prototype.toJSON = function () {
+      return moment(this).format('YYYY-MM-DD');
+    };
+
+    var body = JSON.stringify(obj);
+    return await this.http
+      .post(environment.apibaseUrl + 'User/PostUser', body, this.httpOptions)
+      .toPromise()
+      .then(
+        (res) => {
+          return res;
+        },
+        (msg) => {
+          return null;
+        }
+      );
+  }
+
   async GetRoleMenu(obj: any) {
     Date.prototype.toJSON = function () {
       return moment(this).format('YYYY-MM-DD');

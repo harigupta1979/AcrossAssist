@@ -71,7 +71,7 @@ export class ForgotPasswordComponent {
     }
     let dt: any = await this.auth.GenerateLoginOTP(forgetpwdForm);
     if (dt && dt['Message'] === 'Success') {
-      this.toastr.success('OTP Send Successfully', 'Reset Password');
+      this.toastr.showSuccess('OTP Send Successfully', 'Reset Password');
       this.isShowtxtOtp = true;
       this.isShowbtnGenerateOtp = false;
       this.isShowbtnVerifyOtp = true;
@@ -82,7 +82,10 @@ export class ForgotPasswordComponent {
       this.OTPID = dt['Data'][0].OTPID;
       this.OTP_EXPIRE_TIME = new Date(dt['Data'][0].OTP_EXPIRE_TIME);
     } else {
-      this.toastr.error('Incorrect username, Please check!', 'Reset Password');
+      this.toastr.showError(
+        'Incorrect username, Please check!',
+        'Reset Password'
+      );
     }
     this.isSubmitting = false;
   }
@@ -100,7 +103,7 @@ export class ForgotPasswordComponent {
       const forgetpwdForm = { Username, Otpid: this.OTPID, Userotp };
       let data: any = await this.auth.VerifyUserOTP(forgetpwdForm);
       if (data && data['Message'] === 'Success') {
-        this.toastr.success('OTP verified', 'Reset Password');
+        this.toastr.showSuccess('OTP verified', 'Reset Password');
         this.isOTPVerified = true;
         this.isShowtxtOtp = false;
         this.isShowtxtNewPwd = true;
@@ -110,17 +113,17 @@ export class ForgotPasswordComponent {
         this.forgetpwdForm.controls['Newpassword'].setValue('');
         this.forgetpwdForm.controls['Reenterpassword'].setValue('');
       } else {
-        this.toastr.error('OTP Expired', 'Reset Password');
+        this.toastr.showError('OTP Expired', 'Reset Password');
       }
     } else {
-      this.toastr.error('OTP Does Not Match', 'Reset Password');
+      this.toastr.showError('OTP Does Not Match', 'Reset Password');
     }
     this.isSubmitting = false;
   }
 
   async setUserPassword() {
     if (this.forgetpwdForm.invalid || !this.isOTPVerified) {
-      this.toastr.error('OTP Not Verified', 'Reset Password');
+      this.toastr.showError('OTP Not Verified', 'Reset Password');
       return;
     }
     const forgetpwdForm = {
@@ -135,7 +138,7 @@ export class ForgotPasswordComponent {
         this.forgetpwdForm.controls['Passwordexpiredays'].value,
     };
     if (forgetpwdForm.Newpassword !== forgetpwdForm.Reenterpassword) {
-      this.toastr.error(
+      this.toastr.showError(
         'New Password and Re-enter password do not match',
         'Reset Password'
       );
@@ -143,7 +146,7 @@ export class ForgotPasswordComponent {
     }
     let data: any = await this.auth.UpdateUserPassword(forgetpwdForm);
     if (data && data['Message'] === 'Success') {
-      this.toastr.success('Password set successfully', 'Reset Password');
+      this.toastr.showSuccess('Password set successfully', 'Reset Password');
       this.router.navigate(['/login']);
     }
   }

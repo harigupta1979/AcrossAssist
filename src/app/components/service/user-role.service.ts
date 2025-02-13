@@ -76,13 +76,67 @@ export class dbUserRoleService {
       );
   }
   async PostService(obj: any) {
-    debugger;
     Date.prototype.toJSON = function () {
       return moment(this).format('YYYY-MM-DD');
     };
     var body = JSON.stringify(obj);
     return await this.http
       .post(environment.apibaseUrl + 'Role/PostRole', body, this.httpOptions)
+      .toPromise()
+      .then(
+        (res) => {
+          return res;
+        },
+        (msg) => {
+          return null;
+        }
+      );
+  }
+
+  async GetSelectionDetailsByLocation(FilterId: any) {
+    const seletctionModel = {
+      PinCode: FilterId,
+    };
+    var body = JSON.stringify(seletctionModel);
+    return await this.http
+      .post(
+        environment.apibaseUrl + 'DropdownSelection/GetLocationByPinCode',
+        body,
+        this.httpOptions
+      )
+      .toPromise()
+      .then(
+        (res) => {
+          return res;
+        },
+        (msg) => {
+          return null;
+        }
+      );
+  }
+  async GetSelectionDetails(
+    // Condition: string,
+    // BusinessPartnerId: number,
+    FilterId: number,
+    FilterId2: number,
+    FilterId3: string | null,
+    LoginUserId: number | null = null
+  ) {
+    const fromData = {
+      // Condition: Condition,
+      // BusinessPartnerId: BusinessPartnerId,
+      FilterId: FilterId,
+      FilterId2: FilterId2,
+      FilterId3: FilterId3,
+      LoginUserId: LoginUserId,
+    };
+    var body = JSON.stringify(fromData);
+    return await this.http
+      .post(
+        environment.apibaseUrl + 'DropdownSelection/GetSelection',
+        body,
+        this.httpOptions
+      )
       .toPromise()
       .then(
         (res) => {

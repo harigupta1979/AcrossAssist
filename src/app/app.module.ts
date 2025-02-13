@@ -13,11 +13,25 @@ import { provideHttpClient } from '@angular/common/http';
 import { AuthService } from './Services/auth.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {
+  MAT_DATE_LOCALE,
+  DateAdapter,
+  MAT_DATE_FORMATS,
+} from '@angular/material/core';
+import {
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    MaterialModule,
     MatSidenavModule,
     MatToolbarModule,
     RouterModule,
@@ -28,11 +42,20 @@ import { AppComponent } from './app.component';
     ReactiveFormsModule,
     MaterialModule,
     AppRoutingModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
   ],
   providers: [
-    provideHttpClient(), // Provide the HTTP client here
+    provideHttpClient(),
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }, // Default UK Date Format
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }, // ✅ Default Moment Config
     AuthService,
-    // Optionally, add interceptors or other HTTP-related providers if needed
   ],
 })
 export class AppModule {}

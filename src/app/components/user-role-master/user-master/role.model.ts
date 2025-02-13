@@ -17,6 +17,6 @@ export interface Role {
 }
 
 interface RoleResponse {
-  FinalMode?: string; // "INSERT" or "UPDATE"
+  FinalMode?: string;
   Message?: string | null;
 }

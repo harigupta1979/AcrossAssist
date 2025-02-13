@@ -3,7 +3,7 @@
     <h1 mat-dialog-title class="header">
       <span class="user-heading">Add User</span>
     </h1>
-    <button mat-icon-button (click)="closeDialog(false)">
+    <button mat-icon-button class="cross-btn" (click)="closeDialog(false)">
       <mat-icon>close</mat-icon>
     </button>
   </div>
@@ -14,11 +14,23 @@
         <div class="form-row-first">
           <mat-form-field class="form-field" appearance="outline">
             <mat-label>First Name</mat-label>
-            <input matInput formControlName="firstName" />
+            <input matInput formControlName="FirstName" />
+            <mat-error *ngIf="userForm.controls['FirstName'].hasError('required')">
+              First Name is required.
+            </mat-error>
+            <mat-error *ngIf="userForm.controls['FirstName'].hasError('minlength')">
+              Minimum 2 characters required.
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="form-field" appearance="outline">
             <mat-label>Last Name</mat-label>
-            <input matInput formControlName="lastName" />
+            <input matInput formControlName="LastName" />
+            <mat-error *ngIf="userForm.controls['LastName'].hasError('required')">
+              Last Name is required.
+            </mat-error>
+            <mat-error *ngIf="userForm.controls['LastName'].hasError('minlength')">
+              Minimum 2 characters required.
+            </mat-error>
           </mat-form-field>
         </div>
 
@@ -26,65 +38,111 @@
         <div class="form-row">
           <mat-form-field class="form-field" appearance="outline">
             <mat-label>Mobile No</mat-label>
-            <input matInput formControlName="mobileNo" />
+            <input matInput formControlName="ContactNo" />
+            <mat-error *ngIf="userForm.controls['ContactNo'].hasError('required')">
+              Mobile Number is required.
+            </mat-error>
+            <mat-error *ngIf="userForm.controls['ContactNo'].hasError('pattern')">
+              Enter a valid 10-digit mobile number.
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="form-field" appearance="outline">
             <mat-label>Email ID</mat-label>
-            <input matInput formControlName="emailId" />
+            <input matInput formControlName="EmailAddress" />
+            <mat-error *ngIf="userForm.controls['EmailAddress'].hasError('required')">
+              Email is required.
+            </mat-error>
+            <mat-error *ngIf="userForm.controls['EmailAddress'].hasError('email')">
+              Enter a valid email.
+            </mat-error>
           </mat-form-field>
         </div>
-
-        <!-- Next Row: DOB, Pin Code -->
         <div class="form-row">
-          <!-- <mat-form-field>
-                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field> -->
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>DOB</mat-label>
+            <input matInput [matDatepicker]="DOB" formControlName="DOB" />
+            <mat-datepicker-toggle matSuffix [for]="DOB"></mat-datepicker-toggle>
+            <mat-datepicker #DOB></mat-datepicker>
+            <mat-error *ngIf="userForm.controls['DOB'].hasError('required')">
+              Date of Birth is required.
+            </mat-error>
+          </mat-form-field>
           <mat-form-field class="form-field" appearance="outline">
             <mat-label>Pin Code</mat-label>
-            <input matInput formControlName="pinCode" />
+            <input matInput placeholder="Pin Code" formControlName="PinCode" autocomplete="off"
+              (change)="GetLocationByPinCode()" maxlength="6" (keypress)="sharedService.OnlyNumber($event)">
           </mat-form-field>
+          <mat-error
+            *ngIf="userForm.controls['PinCode'].hasError('minlength') || userForm.controls['PinCode'].hasError('maxlength')">
+            Pin Code must be 6 digits.
+          </mat-error>
         </div>
-
-        <!-- Next Row: City, State -->
         <div class="form-row">
           <mat-form-field class="form-field" appearance="outline">
             <mat-label>City</mat-label>
-            <mat-select formControlName="city">
-              <mat-option *ngFor="let city of cities" [value]="city">{{ city }}</mat-option>
+            <mat-select formControlName="CityId">
+              <mat-option *ngFor="let city of cityList" [value]="city.CityId">
+                {{ city.CityName }}
+              </mat-option>
             </mat-select>
           </mat-form-field>
+
           <mat-form-field class="form-field" appearance="outline">
             <mat-label>State</mat-label>
-            <mat-select formControlName="state">
-              <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+            <!-- <input matInput formControlName="StateName" readonly> -->
+            <mat-select formControlName="StateId">
+              <mat-option *ngFor="let state of stateList" [value]="state.ID">
+                {{ state.NAME }}
+              </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-
-        <!-- Next Row: Role Reporting -->
         <div class="form-row">
-          <mat-form-field class="form-field" appearance="outline">
-            <mat-label>Role Reporting To</mat-label>
-            <mat-select formControlName="reportingTo">
-              <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+          <div class="form-row">
+            <!-- Role Dropdown -->
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label> Role</mat-label>
+              <mat-select formControlName="RoleId">
+                <mat-option [value]="null">Select Role</mat-option>
+                <mat-option *ngFor="let role of userRoles" [value]="role.ID"
+                  (onSelectionChange)="onselectUserRole(role)">
+                  {{ role.NAME }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
+            <!-- Reporting Role Dropdown (Filtered based on Role Selection) -->
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label> Reporting Role</mat-label>
+              <mat-select formControlName="ReportingPersonId">
+                <mat-option [value]="null">Select Reporting Role</mat-option>
+                <mat-option *ngFor="let role of reportingRoles" [value]="role.ID">
+                  {{ role.NAME }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div>
         <!-- Last Row: Active / Inactive Radio Buttons -->
-        <div class="form-row">
-          <mat-radio-group formControlName="status">
-            <mat-radio-button value="active">Active</mat-radio-button>
-            <mat-radio-button value="inactive">Inactive</mat-radio-button>
+        <div class=" form-row">
+          <mat-radio-group formControlName="IsActive">
+            <mat-radio-button [value]="true">Active</mat-radio-button>
+            <mat-radio-button [value]="false">Inactive</mat-radio-button>
           </mat-radio-group>
         </div>
 
         <!-- Submit Button -->
-        <div class="form-row">
-          <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
-            Submit
+        <div class="form-row-button">
+          <button mat-raised-button color="primary" class="cancelBtn" [mat-dialog-close]="null">
+            Cancel
           </button>
+          <button mat-raised-button type="submit" class="SaveBtn">
+            {{ pagemode === 'Edit' ? 'Update' : 'Save' }}
+          </button>
+          <!-- <button mat-raised-button type="submit" class="SaveBtn" disabled="userForm.invalid">
+            {{ pagemode === 'Edit' ? 'Update' : 'Save' }}
+          </button> -->
         </div>
       </form>
     </div>
