@@ -35,10 +35,12 @@ th {
   text-wrap: nowrap !important;
   padding-top: 12px;
   font-size: 14px;
+  font-family: Mukta Vaani !important;
   border-bottom: 1px solid #ccdeeb !important;
 }
 td {
   color: #1d1b20;
+  font-family: Mukta Vaani !important;
   opacity: 80%;
   text-wrap: nowrap !important;
   font-size: 13px;
@@ -49,13 +51,20 @@ td {
 
 .mat-mdc-table tr:nth-child(odd) td {
   background-color: #e7f5ff !important;
+  font-family: Mukta Vaani !important;
 }
 
 .mat-mdc-table tr:nth-child(even) td {
   background-color: #ffffff !important;
+  font-family: Mukta Vaani !important;
 }
 .active-button {
   width: 80%;
   height: 30px;
   background-color: #2e9946 !important;
+}
+.editContianer {
+  width: 100%;
+  padding-top: 10px;
+  font-family: Mukta Vaani !important;
 }

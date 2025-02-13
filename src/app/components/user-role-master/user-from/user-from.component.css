@@ -75,7 +75,9 @@ mat-form-field .mat-form-field-outline {
   display: flex;
   font-size: 10px;
 }
-
+.mdc-text-field--outlined {
+  height: 50px !;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .form-row {
