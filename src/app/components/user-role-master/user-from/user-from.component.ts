@@ -68,32 +68,8 @@ export class UserFromComponent {
     await this.getrole();
     await this.getReportingRole();
     await this.getcountry();
-    this.userForm.controls['PinCode'].valueChanges.subscribe(
-      async (pinCode) => {
-        if (pinCode && pinCode.length === 6) {
-          await this.GetLocationByPinCode();
-        }
-      }
-    );
-
-    if (this.userForm.controls['PinCode'].value) {
-      await this.GetLocationByPinCode();
-    }
-    this.userForm.controls['CountryId'].valueChanges.subscribe(
-      async (countryId) => {
-        if (countryId) {
-          await this.getstate(countryId);
-        }
-      }
-    );
-
-    this.userForm.controls['StateId'].valueChanges.subscribe(
-      async (stateId) => {
-        if (stateId) {
-          await this.getcity(stateId);
-        }
-      }
-    );
+    await this.getLocationPincode();
+    await this.userListEdit();
   }
 
   userFormBuild() {
@@ -133,6 +109,21 @@ export class UserFromComponent {
   get f() {
     return this.userForm.controls;
   }
+  async userListEdit() {
+    if (this.data.user.UserId) {
+      this.pagemode = 'Edit';
+      Object.keys(this.userForm.controls).forEach((key) => {
+        let value = this.data.user[key];
+
+        if (key === 'DOB' && value) {
+          let [day, month, year] = value.split('/');
+          value = new Date(`${year}-${month}-${day}`);
+        }
+        this.userForm.controls[key].setValue(value);
+      });
+    }
+  }
+
   async getrole() {
     let dataobj: Record<string, any> | null | undefined =
       await this.sharedRoleService.GetSelection('role', null, null, null);
@@ -140,7 +131,6 @@ export class UserFromComponent {
     if (dataobj && dataobj['Data']) {
       this.userRoles = dataobj['Data'];
     }
-    console.log(this.userRoles, 'userRoles');
   }
   async getReportingRole() {
     const dataobj: Record<string, any> | null | undefined =
@@ -156,16 +146,13 @@ export class UserFromComponent {
     } else {
       this.reportingRoles = [];
     }
-    console.log(this.reportingRoles, 'reportingRoles');
   }
   onselectUserRole(role: any) {
     if (!role || role.RoleParentId === undefined) {
       this.toastService.showError('Invalid role selected!');
       return;
     }
-
     this.roleParentId = role.RoleParentId;
-
     if (this.userForm && this.userForm.controls['UserType']) {
       this.userForm.controls['UserType'].setValue(role.NAME || null);
     } else {
@@ -176,20 +163,41 @@ export class UserFromComponent {
 
     this.getReportingRole();
   }
+  async getLocationPincode() {
+    this.userForm.controls['PinCode'].valueChanges.subscribe(
+      async (pinCode) => {
+        if (pinCode && pinCode.length === 6) {
+          await this.GetLocationByPinCode();
+        }
+      }
+    );
+    if (this.userForm.controls['PinCode'].value) {
+      await this.GetLocationByPinCode();
+    }
+    this.userForm.controls['CountryId'].valueChanges.subscribe(
+      async (countryId) => {
+        if (countryId) {
+          await this.getstate(countryId);
+        }
+      }
+    );
 
+    this.userForm.controls['StateId'].valueChanges.subscribe(
+      async (stateId) => {
+        if (stateId) {
+          await this.getcity(stateId);
+        }
+      }
+    );
+  }
   async GetLocationByPinCode() {
     let pinCode = this.userForm.controls['PinCode'].value;
     if (!pinCode || pinCode.length !== 6) return;
 
     let data = await this.sharedService.GetSelectionDetailsByLocation(pinCode);
-    console.log('Pincode API Response:', data);
-
     if (data && (data as ApiResponse).FinalMode === 'DataFound') {
       let PincodeData = (data as ApiResponse).Data;
-      console.log('Extracted Pincode Data:', PincodeData);
-
       if (!PincodeData || PincodeData.length === 0) {
-        console.error('PincodeData is empty!');
         return;
       }
       this.userForm.controls['CountryId'].setValue(
@@ -213,20 +221,15 @@ export class UserFromComponent {
       this.stateList = [
         { ID: PincodeData[0]['StateId'], NAME: PincodeData[0]['StateName'] },
       ];
-
-      console.log('Updated City List:', this.cityList);
-      console.log('Updated State List:', this.stateList);
     }
   }
 
   findUnique<T>(arr: T[], predicate: (item: T) => string | number): T[] {
-    console.log('Original City List Before Processing:', arr);
     const found: Record<string | number, T> = {};
     arr.forEach((d) => {
       found[predicate(d)] = d;
     });
     let uniqueCities = Object.values(found);
-    console.log('Unique Cities Processed:', uniqueCities);
     return uniqueCities;
   }
 
@@ -241,7 +244,6 @@ export class UserFromComponent {
     if (data != null && (data as ApiResponse).FinalMode == 'DataFound') {
       this.countryList = (data as ApiResponse).Data;
     }
-    console.log(data, 'getcountry');
   }
   async getstate(countryId: number) {
     let data = await this.sharedService.GetSelectionDetails(
@@ -254,7 +256,6 @@ export class UserFromComponent {
     if (data != null && (data as ApiResponse).FinalMode == 'DataFound') {
       this.stateList = (data as ApiResponse).Data;
     }
-    console.log(data, 'getstate');
   }
   async getcity(stateId: number) {
     let data = await this.sharedService.GetSelectionDetails(
@@ -267,7 +268,6 @@ export class UserFromComponent {
     if (data != null && (data as ApiResponse).FinalMode == 'DataFound') {
       this.cityList = (data as ApiResponse).Data;
     }
-    console.log(this.cityList, 'cityList');
   }
   async onSubmit(): Promise<void> {
     this.submitted = true;
@@ -299,9 +299,6 @@ export class UserFromComponent {
       UpdatedBy: 1,
       ReportingPersonId: this.userForm.value.ReportingPersonId,
     };
-
-    console.log('Submitting User Data:', formData);
-
     try {
       const response = (await this.authService.PostServiceUser(
         formData
@@ -325,7 +322,6 @@ export class UserFromComponent {
         );
       }
     } catch (error) {
-      console.error('Error Creating User:', error);
       this.toastService.showError(
         'An error occurred while saving the user.',
         'User'
@@ -335,7 +331,6 @@ export class UserFromComponent {
   closeDialog(result: boolean): void {
     this.dialogRef.close({ success: result });
   }
-
   onclose() {
     this.dialogRef.close();
   }

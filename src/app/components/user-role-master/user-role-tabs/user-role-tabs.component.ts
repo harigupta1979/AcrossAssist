@@ -80,9 +80,7 @@ export class UserRoleTabsComponent {
         width: '500px',
         maxHeight: '90vh',
         disableClose: true,
-        data: {
-          /* Data passed to the dialog */
-        },
+        data: {},
         position: {
           right: '0px',
           top: '50px',
@@ -121,8 +119,5 @@ export class UserRoleTabsComponent {
   savePermissions() {
     this.eventEmitterService.triggersavepermission();
   }
-  closeDrawer() {
-   
-  }
- 
+  closeDrawer() {}
 }
