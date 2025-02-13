@@ -4,6 +4,8 @@ import { ROLES } from '../permission-data';
 import { Module, Role } from '../user-master/role.model';
 import { dbCommonService } from '../../service/commonservice.service';
 import { dbUserRoleService } from '../../service/user-role.service';
+import { EventEmitterService } from '../../service/eventemitter.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-permissions-master',
@@ -12,6 +14,7 @@ import { dbUserRoleService } from '../../service/user-role.service';
   styleUrl: './permissions-master.component.css',
 })
 export class PermissionsMasterComponent {
+  private subscription!: Subscription;
   roles: any[] = [];
   menuList: any[] = [];
   selectedRole: Role | null = null;
@@ -24,11 +27,15 @@ export class PermissionsMasterComponent {
   expandedGroupId: number | null = null; // Track which group is expanded
   constructor(
     private service: dbUserRoleService,
-    private sharedservice: dbCommonService
+    private sharedservice: dbCommonService,
+    private eventEmitterService: EventEmitterService
   ) {}
 
   async ngOnInit() {
     await this.getrole();
+    this.subscription = this.eventEmitterService.savepermission$.subscribe(() => {
+      this.savePermissions();
+    });
   }
   onaddnew() {
     this.activeMenuId = null;
@@ -196,7 +203,7 @@ export class PermissionsMasterComponent {
       //   closeButton:true,
       //   positionClass:'top-center',
       // });
-      alert(data['Message']);
+     alert(data['Message']);
       this.getRoleMenu();
     }
 

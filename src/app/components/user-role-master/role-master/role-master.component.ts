@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { MaterialModule } from '../../../shared/material.module';
 import { dbUserRoleService } from '../../service/user-role.service';
 import { dbCommonService } from '../../service/commonservice.service';
 import { MatButtonModule } from '@angular/material/button';
 
 import { MatDialog } from '@angular/material/dialog';
 import { RoleFormComponent } from '../role-form/role-form.component';
+import { EventEmitterService } from '../../service/eventemitter.service';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { MaterialModule } from '../../../shared/material.module';
 
 @Component({
   selector: 'app-role-master',
@@ -14,8 +16,11 @@ import { RoleFormComponent } from '../role-form/role-form.component';
   styleUrl: './role-master.component.css',
 })
 export class RoleMasterComponent {
+  private subscription!: Subscription;
+
   constructor(
     private service: dbUserRoleService,
+    private eventEmitterService: EventEmitterService,
     private sharedservice: dbCommonService,
     private dialog: MatDialog
   ) {}
@@ -23,6 +28,9 @@ export class RoleMasterComponent {
   async ngOnInit() {
     await this.getrole();
     await this.getrollist();
+    this.subscription = this.eventEmitterService.refreshList$.subscribe(() => {
+      this.getrollist();
+    });
   }
   campaignList: any[] = [];
   list: any[] = [];

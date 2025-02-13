@@ -6,6 +6,7 @@ import { OtpVerificationComponent } from './auth/otp-verification/otp-verificati
 import { SetPasswordComponent } from './auth/set-password/set-password.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { AuthGuard } from './Services/auth.guard';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 
 
 export const routes: Routes = [
@@ -26,5 +27,5 @@ export const routes: Routes = [
     canActivate:[AuthGuard],
     loadChildren: () => import('../app/components/component.module').then(m => m.ComponentModule)
   },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', component: PageNotFoundComponent },
 ];

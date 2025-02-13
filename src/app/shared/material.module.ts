@@ -91,7 +91,7 @@ import { AuthService } from '../Services/auth.service';
     MatDatepickerModule,
     MatDialogModule,
     MatNativeDateModule,
-    MatMomentDateModule,
+    MatMomentDateModule
   ],
   providers: [
     provideHttpClient(),

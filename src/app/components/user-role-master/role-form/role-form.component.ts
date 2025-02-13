@@ -7,7 +7,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { dbRoleMenuMappingService } from '../../../Services/rolemenumapping.service';
 import { MaterialModule } from '../../../shared/material.module';
@@ -15,6 +15,7 @@ import { dbCommonService } from '../../service/commonservice.service';
 import { Module, Role } from '../user-master/role.model';
 import { ToastService } from '../../../Services/toast.service';
 import { dbUserRoleService } from '../../service/user-role.service';
+import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 
 interface RoleResponse {
   FinalMode: string | null;
@@ -73,7 +74,7 @@ export class RoleFormComponent {
   }
   async getrole() {
     let dataobj: Record<string, any> | null | undefined =
-      await this.sharedservice.GetSelection('role', null, null, null);
+      await this.sharedservice.GetSelection('reportingrole',null, this.roleForm.controls['RoleId'].value,  null);
 
     if (dataobj && dataobj['Data']) {
       this.reportingRoles = dataobj['Data'];

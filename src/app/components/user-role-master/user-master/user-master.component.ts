@@ -5,6 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { dbUserRoleService } from '../../service/user-role.service';
 import { MaterialModule } from '../../../shared/material.module';
 import { dbRoleMenuMappingService } from '../../../Services/rolemenumapping.service';
+import { EventEmitterService } from '../../service/eventemitter.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-master',
@@ -13,6 +15,7 @@ import { dbRoleMenuMappingService } from '../../../Services/rolemenumapping.serv
   styleUrl: './user-master.component.css',
 })
 export class UserMasterComponent {
+  private subscription!: Subscription;
   displayedColumns: string[] = [
     'name',
     'role',
@@ -31,10 +34,13 @@ export class UserMasterComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private dbUserService: dbRoleMenuMappingService) {}
+  constructor(private dbUserService: dbRoleMenuMappingService, private eventEmitterService: EventEmitterService,) {}
 
   async ngOnInit() {
     await this.getUser();
+    this.subscription = this.eventEmitterService.refreshuserList$.subscribe(() => {
+      this.getUser();
+    });
   }
   async getUser() {
     let dataobj: Record<string, any> | null | undefined =

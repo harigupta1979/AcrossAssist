@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserFromComponent } from '../user-from/user-from.component';
 import { RoleFormComponent } from '../role-form/role-form.component';
 import { MatSidenav } from '@angular/material/sidenav';
+import { EventEmitterService } from '../../service/eventemitter.service';
 
 @Component({
   selector: 'app-user-role-tabs',
@@ -30,6 +31,7 @@ export class UserRoleTabsComponent {
   drawerTitle: any;
   constructor(
     private router: Router,
+    private eventEmitterService: EventEmitterService,
     private route: ActivatedRoute,
     private dialog: MatDialog
   ) {}
@@ -92,6 +94,7 @@ export class UserRoleTabsComponent {
         if (result && result.success) {
           console.log('User added successfully:', result);
         }
+        this.eventEmitterService.triggerUserRefresh();
       });
   }
 
@@ -111,11 +114,15 @@ export class UserRoleTabsComponent {
         if (result && result.success) {
           console.log('Role added successfully:', result);
         }
+        this.eventEmitterService.triggerRefresh();
       });
   }
 
   savePermissions() {
-    this.isSaveVisible = false;
+    this.eventEmitterService.triggersavepermission();
   }
-  closeDrawer() {}
+  closeDrawer() {
+   
+  }
+ 
 }
