@@ -14,13 +14,8 @@
 
       <div class="form-row">
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label> Role</mat-label>
-          <mat-select formControlName="RoleParentId">
-            <mat-option [value]="null">Select Role</mat-option>
-            <mat-option *ngFor="let role of reportingRoles" [value]="role.ID">
-              {{ role.NAME }}
-            </mat-option>
-          </mat-select>
+          <mat-label>Role Name</mat-label>
+          <input matInput formControlName="RoleName" />
         </mat-form-field>
 
         <mat-form-field class="form-field" appearance="outline">
