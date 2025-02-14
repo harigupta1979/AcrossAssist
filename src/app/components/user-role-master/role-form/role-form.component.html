@@ -20,7 +20,7 @@
 
         <mat-form-field class="form-field" appearance="outline" >
           <mat-label>Reporting Role</mat-label>
-          <mat-select formControlName="ReportingPersonId" [disabled]="pagemode === 'View'">
+          <mat-select formControlName="RoleParentId" [disabled]="pagemode === 'View'">
             <mat-option [value]="null">Select Reporting Role</mat-option>
             <mat-option *ngFor="let role of reportingRoles" [value]="role.ID">
               {{ role.NAME }}
