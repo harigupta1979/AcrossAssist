@@ -4,6 +4,7 @@ import {
   ElementRef,
   EventEmitter,
   Inject,
+  OnInit,
   Output,
   ViewChild,
   output,
@@ -36,7 +37,7 @@ interface ApiResponse {
   templateUrl: './user-from.component.html',
   styleUrl: './user-from.component.css',
 })
-export class UserFromComponent {
+export class UserFromComponent  implements OnInit{
   @Output() close = new EventEmitter<void>();
   @Output() refreshList = new EventEmitter<void>();
   @ViewChild('closeButton') closeButton!: ElementRef; // Close button reference

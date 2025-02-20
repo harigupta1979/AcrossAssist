@@ -1,0 +1,69 @@
+/* Make the dialog full width */
+.vendor-main-container {
+    padding: 16px;
+  }
+  
+  /* Align header text and close button */
+  .vendor-head-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    border: none;
+  }
+  
+  /* Style for form fields */
+  .form-field {
+    width: 100%;
+  }
+  
+  /* Align role name and reporting role in one row */
+  .form-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  
+  /* Ensure both fields take equal width */
+  .form-row .mat-form-field {
+    flex: 1;
+  }
+  
+  /* Description field full width */
+  .form-row-desc .mat-form-field {
+    width: 100%;
+  }
+  
+  /* Align radio buttons in a row */
+  .mat-radio-group {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  
+  /* Style the button row */
+  .form-row-button {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .upload-section {
+    margin-bottom: 20px;
+  }
+  
+  .upload-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .upload-section input[type="file"] {
+    margin-bottom: 10px;
+  }
+  
+  .upload-section select {
+    margin-left: 10px;
+  }
+  
+  

@@ -1,1 +1,221 @@
-<p>vendor-form works!</p>
+<div class="vendor-main-container">
+    <div class="vendor-head-container">
+      <h1 mat-dialog-title class="header">
+        <span class="vendor-heading">Add User</span>
+      </h1>
+      <button mat-icon-button class="cross-btn" (click)="closeDialog(false)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  
+    <div class="vendor-form-container">
+      <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+        
+        <div class="form-row">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>OnBoard Name</mat-label>
+            <input matInput formControlName="OnBoardName" />
+            <mat-error *ngIf="vendorForm.controls['OnBoardName'].hasError('required')">
+              OnBoard Name is required.
+            </mat-error>
+          </mat-form-field>
+        
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Mobile No</mat-label>
+      <input matInput formControlName="MobileNo" />
+      <mat-error *ngIf="vendorForm.controls['MobileNo'].hasError('required')">
+        Mobile Number is required.
+      </mat-error>
+      <mat-error *ngIf="vendorForm.controls['MobileNo'].hasError('pattern')">
+        Enter a valid 10-digit mobile number.
+      </mat-error>
+    </mat-form-field>
+  </div>
+   <!-- Email ID -->
+   <div class="form-row">
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>Email ID</mat-label>
+      <input matInput formControlName="EmailId" />
+      <mat-error *ngIf="vendorForm.controls['EmailId'].hasError('required')">
+        Email is required.
+      </mat-error>
+      <mat-error *ngIf="vendorForm.controls['EmailId'].hasError('email')">
+        Enter a valid email.
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-row">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="Address" />
+            <mat-error *ngIf="vendorForm.controls['Address'].hasError('required')">
+              Address is required.
+            </mat-error>
+          </mat-form-field>
+        </div>        
+        <!-- Location ID -->
+        <div class="form-row">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Location</mat-label>
+            <mat-select formControlName="LocationId">
+              <mat-option *ngFor="let location of locationList" [value]="location.ID">
+                {{ location.NAME }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="vendorForm.controls['LocationId'].hasError('required')">
+              Location is required.
+            </mat-error>
+          </mat-form-field>
+        
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label label-sm>Pin Code</mat-label>
+            <input matInput placeholder="Pin Code" formControlName="PinCode" autocomplete="off"      (change)="GetLocationByPinCode()" maxlength="6"  minlength="6">
+            <!-- (keypress)="sharedService.OnlyNumber($event)" -->
+              
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>City</mat-label>
+            <mat-select formControlName="CityId" autocomplete="off" >
+              <mat-option>Select City</mat-option>
+              <mat-option *ngFor="let _list of cityList" [value]="_list.CityId">
+                {{_list.CityName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+          <input matInput hidden="true" formControlName="StateId">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label label-sm>State</mat-label>
+            <input matInput placeholder="State" formControlName="StateName" autocomplete="off" [readonly]="true">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label label-sm>Country</mat-label>
+            <input matInput hidden="true" formControlName="CountryId">
+            <input matInput placeholder="Country" formControlName="CountryName"
+                   autocomplete="off" [readonly]="true">
+          </mat-form-field>
+       
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>MSME Number</mat-label>
+            <input matInput formControlName="MSMENumber" />
+            <mat-error *ngIf="vendorForm.controls['MSMENumber'].hasError('required')">
+              MSME Number is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <!-- GST Number -->
+        <div class="form-row">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>GST Number</mat-label>
+            <input matInput formControlName="GSTNumber" />
+            <mat-error *ngIf="vendorForm.controls['GSTNumber'].hasError('required')">
+              GST Number is required.
+            </mat-error>
+          </mat-form-field>
+       
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>PAN Number</mat-label>
+            <input matInput formControlName="PANNumber" />
+            <mat-error *ngIf="vendorForm.controls['PANNumber'].hasError('required')">
+              PAN Number is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+  
+       
+  
+        <!-- Bank Details -->
+        <div class="form-row">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Bank ID</mat-label>
+            <mat-select formControlName="BankId">
+              <mat-option *ngFor="let bank of bankList" [value]="bank.ID">
+                {{ bank.Name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="vendorForm.controls['BankId'].hasError('required')">
+              Bank ID is required.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Account Type</mat-label>
+            <mat-select formControlName="AccountTypeId">
+              <mat-option *ngFor="let accountType of accountTypeList" [value]="accountType.ID">
+                {{ accountType.Name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="vendorForm.controls['AccountTypeId'].hasError('required')">
+              Account Type is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+  
+        <!-- Account Details -->
+        <div class="form-row">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Account Name</mat-label>
+            <input matInput formControlName="AccountName" />
+          </mat-form-field>
+  
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Account Number</mat-label>
+            <input matInput formControlName="AccountNo" />
+          </mat-form-field>
+  
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>IFSC Code</mat-label>
+            <input matInput formControlName="IFSCCode" />
+          </mat-form-field>
+        </div>
+  
+        <!-- Submit and Cancel Buttons -->
+        <div class="form-row-button">
+          <button mat-raised-button color="primary" class="cancelBtn" [mat-dialog-close]="null">
+            Cancel
+          </button>
+          <button mat-raised-button type="submit" class="SaveBtn">
+            {{ pagemode === 'Edit' ? 'Update' : 'Save' }}
+          </button>
+        </div>
+     
+        <div *ngFor="let docType of documentTypes">
+          <div class="upload-section">
+            <h3>{{ docType.NAME }}</h3>
+            
+            <!-- Only show the file input if no file has been uploaded for this docType -->
+            <input 
+              type="file" 
+              (change)="onFilesChange($event, docType.ID)" 
+              *ngIf="!isDocumentTypeUploaded(docType.ID)">
+            
+            <!-- Show uploaded files if there are any for this docType -->
+            <div *ngIf="isDocumentTypeUploaded(docType.ID)">
+              <ul>
+                <li *ngFor="let file of getFilesForDocumentType(docType.ID)">
+                  <strong>{{ file.FileName }}</strong> ({{ file.FileSize }})
+                  
+                  <!-- Delete file button -->
+                  <button mat-icon-button (click)="deleteFile(docType.ID)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        
+
+        
+      </form>
+    </div>
+  </div>
+  

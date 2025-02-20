@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       username: this.loginForm.controls['username'].value,
       password: this.crypto.encrypt(this.loginForm.controls['password'].value),
     };
-
+console.log(loginForm,'pallavi.kadam@quantique.ai')
     let dt: any = await this.auth.CheckUserLogin(loginForm);
 
     if (dt != null && dt['FinalMode'] == 'DataFound' && dt['Message'] != '') {

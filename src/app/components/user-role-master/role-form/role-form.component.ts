@@ -30,7 +30,7 @@ interface RoleResponse {
 })
 export class RoleFormComponent {
   @Output() close = new EventEmitter<void>();
-  @ViewChild('closeButton') closeButton!: ElementRef; // Close button reference
+  @ViewChild('closeButton') closeButton!: ElementRef;
   roleForm!: FormGroup;
   selectedModule: Module | null = null;
   selectedRole: Role | null = null;

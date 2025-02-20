@@ -50,7 +50,7 @@ export class dbCommonService {
   }
   async GetSelectionDetailsByLocation(FilterId: any) {
     const seletctionModel = {
-      StateId: FilterId,
+      PinCode: FilterId,
     };
     var body = JSON.stringify(seletctionModel);
     return await this.http
@@ -60,7 +60,7 @@ export class dbCommonService {
         this.httpOptions
       )
       .toPromise()
-      .then(
+      .then( 
         (res) => {
           return res;
         },
