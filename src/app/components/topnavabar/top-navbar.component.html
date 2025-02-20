@@ -1,0 +1,40 @@
+<!-- Navbar -->
+<div class="nav-container-main" color="primary">
+  <mat-toolbar color="primary" class="nav-container">
+    <!-- Logo -->
+    <div class="logo-container">
+      <img src="../../assets/img/logo_White 2.png" alt="Logo" class="example-header-image" />
+    </div>
+    <span class="spacer"></span>
+    <!-- Notifications button -->
+    <button mat-icon-button class="nav-button">
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <div class="nav-right-side-content">
+      <button mat-button [matMenuTriggerFor]="beforeMenu" class="nav-button">
+        <span>Admin</span>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+
+      <!-- Dropdown Menu -->
+      <mat-menu #beforeMenu="matMenu">
+        <button mat-menu-item (click)="viewProfile()">
+          Profile<mat-icon>person</mat-icon>
+        </button>
+        <button mat-menu-item (click)="changePassword()">
+          <mat-icon>lock</mat-icon> Change Password
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>power_settings_new</mat-icon> Logout
+        </button>
+      </mat-menu>
+
+
+
+      <!-- Logout button -->
+      <button mat-icon-button class="logout-button" routerLink="/logout" (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+</div>

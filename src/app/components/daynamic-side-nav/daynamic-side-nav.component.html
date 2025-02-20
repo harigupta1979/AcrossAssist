@@ -1,0 +1,60 @@
+<mat-drawer-container class="example-container">
+  <!-- Sidebar -->
+  <mat-drawer #sidenav mode="side" [opened]="true" class="side-nav" [class.collapsed]="isCollapsed">
+    <!-- Sidebar Header with Logo & Toggle Button -->
+    <div class="sidenav-header">
+      <!-- Always Show the Logo -->
+      <span class="logo">
+        <img src="../../../../../assets/img/logo_White 2.png" alt="Acrossassist Logo" class="logo-img" />
+      </span>
+      <!-- Sidebar Toggle Button -->
+      <button mat-icon-button (click)="toggleSidenav()" class="toggle-btn">
+        <mat-icon>{{ isCollapsed ? "menu_open" : "menu_open" }}</mat-icon>
+      </button>
+    </div>
+    <!-- Separator -->
+    <div class="border-end"></div>
+    <mat-nav-list>
+      <ng-container *ngFor="let menu of MENU_ITEMS">
+        <!-- Dashboard Section -->
+        <mat-list-item class="small-panel" *ngIf="menu.type === 'item'">
+        
+            <div class="nav-list-item">
+              <button mat-button [routerLink]="menu.route" class="nav-button" (click)="setActive(menu.route)"
+                [class.active]="activeItem === menu.route">
+                <mat-icon class="nav-icon material-symbols-outlined">{{ menu.icon }}</mat-icon>
+                <span class="mat-list-text" *ngIf="!isCollapsed">{{ menu.title }}</span>
+              </button>
+            </div>
+        
+        </mat-list-item>
+
+        <!-- Grouped Menu with Submenus -->
+        <mat-expansion-panel [expanded]="!isCollapsed" class="small-panel" *ngIf="menu.type === 'group'">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon class="nav-icon material-symbols-outlined">{{ menu.icon }}</mat-icon>
+              <span class="mat-list-text" *ngIf="!isCollapsed">{{ menu.title }}</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-list>
+            <mat-list-item *ngFor="let subMenu of menu.children" [routerLink]="subMenu.route"
+              (click)="setActive(subMenu.route)" [class.active]="activeItem === subMenu.route">
+              <div class="nav-list-text">
+                <mat-icon class="nav-icon material-symbols-outlined">{{ subMenu.icon }}</mat-icon>
+                <span class="mat-list-text" *ngIf="!isCollapsed">{{ subMenu.title }}</span>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+
+      </ng-container>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <!-- Main Content -->
+  <mat-drawer-content class="content-container" [class.shrink]="isCollapsed">
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

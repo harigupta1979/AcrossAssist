@@ -1,0 +1,70 @@
+/* Adding 12px border to the entire table */
+.user-master-container {
+  padding-top: 10px;
+}
+.mat-elevation-z8 {
+  text-align: center;
+}
+.mat-mdc-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: ccdeeb !important;
+  border: 1px solid #ccdeeb !important;
+  border-radius: 6px 6px 0 0 !important;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.mat-mdc-header-row {
+  text-wrap: nowrap !important;
+  background-color: #ccdeeb !important;
+  border-bottom: 1px solid #ccdeeb !important;
+}
+.mat-mdc-table::-webkit-scrollbar {
+  height: 8px;
+}
+.mat-mdc-table::-webkit-scrollbar-thumb {
+  background-color: #ccdeeb;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+
+th {
+  /* color: #000000; */
+  /* text-align: center; */
+  text-wrap: nowrap !important;
+  padding-top: 12px;
+  font-size: 14px;
+  font-family: Mukta Vaani !important;
+  border-bottom: 1px solid #ccdeeb !important;
+}
+td {
+  color: #1d1b20;
+  font-family: Mukta Vaani !important;
+  opacity: 80%;
+  text-wrap: nowrap !important;
+  font-size: 13px;
+  text-align: center;
+  border-top: 1px #e7f5ff;
+  border-bottom: 1px solid #ccdeeb !important;
+}
+
+.mat-mdc-table tr:nth-child(odd) td {
+  background-color: #e7f5ff !important;
+  font-family: Mukta Vaani !important;
+}
+
+.mat-mdc-table tr:nth-child(even) td {
+  background-color: #ffffff !important;
+  font-family: Mukta Vaani !important;
+}
+.active-button {
+  width: 80%;
+  height: 30px;
+  background-color: #2e9946 !important;
+}
+.editContianer {
+  width: 100%;
+  padding-top: 10px;
+  font-family: Mukta Vaani !important;
+}

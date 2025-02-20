@@ -1,0 +1,45 @@
+<div class="login-container">
+  <div class="login-sub-container">
+    <div class="login-mat-card">
+      <div class="login-containt">
+        <div class="login-text ">
+          <p class="login-heding">Login Here</p>
+          <p class="login-heding-span">Please login by entering your Id and Password</p>
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label class="login-mat-label">Email ID</mat-label>
+            <input matInput type="email" name="email" formControlName="username" required />
+            <mat-error *ngIf="f['username']?.invalid && (f['username']?.dirty || f['username']?.touched)">
+              <span *ngIf="f['username']?.errors?.['required']">Email is required.</span>
+              <span *ngIf="f['username']?.errors?.['email']">Invalid email format.</span>
+
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label class="login-mat-label">Password</mat-label>
+            <input matInput type="password" formControlName="password" required />
+            <mat-error *ngIf="f['password']?.invalid && (f['password']?.dirty || f['password']?.touched)">
+              <span *ngIf="f['password']?.errors?.['required']">Password is required.</span>
+            </mat-error>
+
+          </mat-form-field>
+
+          <div class="form-footer">
+            <mat-checkbox formControlName="termsAccepted" required></mat-checkbox>
+            <span class="login-termsAccepted">I agree to the <a href="#">Terms & Conditions</a></span>
+            <a href="/forgot-password" class="forgot-password-link">Forgot Password ?</a>
+
+          </div>
+          <div class="login-button">
+            <button mat-flat-button [disabled]="loginForm.invalid || isSubmitting">Login</button>
+            <mat-spinner *ngIf="isSubmitting" diameter="24"></mat-spinner>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</div>

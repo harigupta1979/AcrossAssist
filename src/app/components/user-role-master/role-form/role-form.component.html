@@ -1,0 +1,57 @@
+<!-- add-role-form.component.html -->
+<div class="role-main-container">
+  <div class="role-head-container">
+    <h1 mat-dialog-title class="header">
+      <span>{{pagemode}} Role</span>
+    </h1>
+    <button mat-icon-button (click)="closeDialog(false)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="role-form-container">
+    <form [formGroup]="roleForm" (ngSubmit)="onSubmit()">
+      <!-- Next Row: First Name, Last Name -->
+
+      <div class="form-row">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Role Name</mat-label>
+          <input matInput formControlName="RoleName" />
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline" >
+          <mat-label>Reporting Role</mat-label>
+          <mat-select formControlName="RoleParentId" [disabled]="pagemode === 'View'">
+            <mat-option [value]="null">Select Reporting Role</mat-option>
+            <mat-option *ngFor="let role of reportingRoles" [value]="role.ID">
+              {{ role.NAME }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row-desc">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="RoleDesc" rows="4"></textarea>
+        </mat-form-field>
+      </div>
+      <!-- Last Row: Active / Inactive Radio Buttons -->
+      <div class="form-row">
+        <mat-radio-group formControlName="IsActive">
+          <mat-radio-button [value]="true">Active</mat-radio-button>
+          <mat-radio-button [value]="false">Inactive</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-row-button" *ngIf="pagemode !== 'View'">
+        <button mat-raised-button color="primary" type="submit" [disabled]="roleForm.invalid">
+          Cancel
+        </button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="roleForm.invalid">
+          {{ pagemode === 'Edit' ? 'Update' : 'Save' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="user-role-main-container">
+  <div>
+    <span class="heading-container">User & Role</span>
+  </div>
+
+  <!-- Tab Row -->
+  <div class="tab-row">
+    <mat-tab-group [(selectedIndex)]="selectedTabIndex" (selectedIndexChange)="onTabChange($event)">
+      <mat-tab label="User"></mat-tab>
+      <mat-tab label="Role"></mat-tab>
+      <mat-tab label="Permissions"></mat-tab>
+    </mat-tab-group>
+
+    <!-- Search Bar in the Center -->
+    <div class="search-container">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" placeholder="Search..." class="search-input" />
+    </div>
+
+    <!-- Add Buttons -->
+    <ng-container *ngIf="selectedTabIndex === 0">
+      <button mat-stroked-button color="'primary'" (click)="openUserForm()">
+        <mat-icon>add</mat-icon> Add User
+      </button>
+    </ng-container>
+    <ng-container *ngIf="selectedTabIndex === 1">
+      <button mat-stroked-button color="'primary'" (click)="openRoleForm()">
+        <mat-icon>add</mat-icon> Add Role
+      </button>
+    </ng-container>
+    <ng-container *ngIf="selectedTabIndex === 2 && isSaveVisible">
+      <button mat-stroked-button color="'primary'" (click)="savePermissions()">
+        <mat-icon>save</mat-icon> Save
+      </button>
+    </ng-container>
+  </div>
+
+  <!-- Side Modal Drawer -->
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer mode="side" position="end" [opened]="isDrawerOpen" class="sidenav">
+      <div class="sidenav-content">
+        <!-- Header (fixed) -->
+        <div class="sidenav-header">
+          <h3>{{ drawerTitle }}</h3>
+          <button mat-icon-button (click)="closeDrawer()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <!-- Scrollable Content -->
+        <div class="sidenav-body">
+          <p *ngFor="let item of [].constructor(50); let i = index">Item {{ i + 1 }}</p>
+        </div>
+      </div>
+    </mat-sidenav>
+  </mat-sidenav-container>
+
+
+</div>
+<router-outlet></router-outlet>
