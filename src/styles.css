@@ -7,7 +7,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Mukta Vaani";
+  font-family: "Inter", sans-serif;
 }
 .success-snackbar {
   background-color: #4caf50;

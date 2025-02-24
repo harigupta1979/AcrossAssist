@@ -1,0 +1,120 @@
+.vendor-list-main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.vendor-list-first-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+  padding-bottom: 10px;
+}
+.vendor-list-heading {
+  display: flex;
+  flex-direction: column;
+}
+.vendorlist-text {
+  font-size: 20px;
+  font-weight: 700;
+}
+.vendor-list-sub-text {
+  color: #656363;
+  font-size: 14px;
+}
+.search-container {
+  width: 30%;
+  padding-top: 10px;
+  position: relative;
+  display: inline-block;
+  gap: 10px;
+  width: 40%;
+}
+
+.search-input {
+  width: 74%;
+  padding: 10px;
+  border-radius: 54px !important;
+  color: #1363dfb2 !important;
+  border: 1px solid #1363dfb2;
+  background-color: #f6f8fc;
+  padding-left: 31px;
+  opacity: 70%;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 45% !important;
+  transform: translateY(-50%);
+  color: #1363dfb2;
+  opacity: 70%;
+}
+
+button {
+  margin-left: 16px;
+}
+.vendor-list-tabel-div {
+  flex-grow: 1;
+  max-height: 500px;
+  border: 1px solid #ccc;
+}
+.table-container {
+  overflow: auto;
+}
+
+.table-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.vendor-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.mat-mdc-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: ccdeeb !important;
+  border: 1px solid #ccdeeb !important;
+  border-top-left-radius: 4px !important;
+  border-top-right-radius: 4px !important;
+}
+
+th {
+  background-color: #f6f8fc;
+  font-weight: 600;
+  padding-top: 12px;
+  font-size: 14px;
+  font-family: Inter !important;
+  border-bottom: 1px solid #ccdeeb !important;
+}
+
+td {
+  color: #656363 !important;
+  font-family: Inter !important;
+  opacity: 80%;
+  text-wrap: nowrap !important;
+  font-size: 13px;
+  text-align: center;
+  border-top: 1px #e7f5ff;
+  border-bottom: 1px solid #ccdeeb !important;
+}
+.mat-header-cell {
+  font-weight: bold;
+}
+
+.mat-row:hover {
+  background-color: #f5f5f5;
+}
+
+button mat-icon {
+  margin-left: 5px;
+}

@@ -1,5 +1,69 @@
-<mat-card class="main-container">
-  <!-- left side -->
+<div class="main-container">
+
+  <!-- Left: Login Form -->
+  <div class="outlet-container">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- Right: Logo + Carousel -->
+  <div class="layout-right-side">
+
+    <!-- Logo -->
+    <div class="logo-container">
+      <img src="../../../assets/img/image 1.png" alt="Logo" class="example-header-image" />
+    </div>
+
+    <!-- Bootstrap Carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+
+      <!-- Dots (Indicators) -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          data-text=""></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" data-text=""></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" data-text=""></button>
+      </div>
+
+
+      <!-- Image Slides -->
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="assets/img/Infographics.png" class="d-block w-100 carousel-image" alt="Image 1">
+        </div>
+        <div class="carousel-item">
+          <img src="assets/img/layout.png" class="d-block w-100 carousel-image" alt="Image 2">
+        </div>
+        <div class="carousel-item">
+          <img src="assets/img/Infographics.png" class="d-block w-100 carousel-image" alt="Image 3">
+        </div>
+      </div>
+      <div class="header-content">
+        <div>
+          <p class="track-service-text">Track Service Partner Payments
+            in a single view</p>
+        </div>
+        <div class="status-text">
+          Real-time status of Service Partner Payments – Pending, under-process at various stages, Paid, rejected etc.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- <owl-carousel-o [options]="carouselOptions">
+      <ng-container *ngFor="let img of images; trackBy: trackByFn">
+        <ng-template carouselSlide>
+          <img [src]="img" class="carousel-image" alt="Slider Image" />
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o> -->
+
+
+
+<!-- <mat-card class="main-container">
   <div class="example-card">
     <div class="card-content">
       <div class="example-header-image-container">
@@ -12,11 +76,6 @@
       </span>
     </div>
   </div>
-  <div class="outlet-container">
-    <router-outlet></router-outlet>
-  </div>
-  <!-- right side -->
-  <!-- <mat-card class="outlet-container">
-    <router-outlet></router-outlet>
-  </mat-card> -->
-</mat-card>
+
+
+</mat-card> -->

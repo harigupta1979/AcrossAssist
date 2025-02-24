@@ -58,8 +58,12 @@ export class ForgotPasswordComponent {
       }
     );
   }
+  goBack(): void {
+    this.router.navigate(['/login']); // Navigates to Login Page
+  }
 
   async generateOTP() {
+    debugger;
     this.isSubmitting = true;
     this.isOTPVerified = false;
     const forgetpwdForm = {

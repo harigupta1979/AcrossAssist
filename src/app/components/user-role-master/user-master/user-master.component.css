@@ -39,8 +39,8 @@ th {
   border-bottom: 1px solid #ccdeeb !important;
 }
 td {
-  color: #1d1b20;
-  font-family: Mukta Vaani !important;
+  color: #333333;
+  font-family: Inter !important;
   opacity: 80%;
   text-wrap: nowrap !important;
   font-size: 13px;
@@ -51,12 +51,12 @@ td {
 
 .mat-mdc-table tr:nth-child(odd) td {
   background-color: #e7f5ff !important;
-  font-family: Mukta Vaani !important;
+  font-family: Inter !important;
 }
 
 .mat-mdc-table tr:nth-child(even) td {
   background-color: #ffffff !important;
-  font-family: Mukta Vaani !important;
+  font-family: Inter !important;
 }
 .active-button {
   width: 80%;

@@ -18,15 +18,15 @@
       <ng-container *ngFor="let menu of MENU_ITEMS">
         <!-- Dashboard Section -->
         <mat-list-item class="small-panel" *ngIf="menu.type === 'item'">
-        
-            <div class="nav-list-item">
-              <button mat-button [routerLink]="menu.route" class="nav-button" (click)="setActive(menu.route)"
-                [class.active]="activeItem === menu.route">
-                <mat-icon class="nav-icon material-symbols-outlined">{{ menu.icon }}</mat-icon>
-                <span class="mat-list-text" *ngIf="!isCollapsed">{{ menu.title }}</span>
-              </button>
-            </div>
-        
+
+          <div class="nav-list-item">
+            <button mat-button [routerLink]="menu.route" class="nav-button" (click)="setActive(menu.route)"
+              [class.active]="activeItem === menu.route">
+              <mat-icon class="nav-icon material-symbols-outlined">{{ menu.icon }}</mat-icon>
+              <span class="mat-list-text" *ngIf="!isCollapsed">{{ menu.title }}</span>
+            </button>
+          </div>
+
         </mat-list-item>
 
         <!-- Grouped Menu with Submenus -->

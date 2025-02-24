@@ -27,6 +27,8 @@ import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -45,6 +47,7 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
+    CarouselModule,
   ],
   providers: [
     provideHttpClient(),

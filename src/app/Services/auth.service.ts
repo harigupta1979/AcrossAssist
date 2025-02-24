@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient,private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   // Http Headers
   httpOptions = {
@@ -31,7 +31,8 @@ export class AuthService {
       );
   }
 
-  async CheckUserLogin(obj: any) {debugger
+  async CheckUserLogin(obj: any) {
+    debugger;
     var body = JSON.stringify(obj);
     return await this.http
       .post(
@@ -90,6 +91,7 @@ export class AuthService {
   }
 
   async GenerateLoginOTP(obj: any) {
+    debugger;
     var body = JSON.stringify(obj);
     return await this.http
       .post(

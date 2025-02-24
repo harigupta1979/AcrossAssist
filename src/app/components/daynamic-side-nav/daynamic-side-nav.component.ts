@@ -19,6 +19,7 @@ export class DaynamicSideNavComponent {
   }
   toggleSidenav() {
     this.isCollapsed = !this.isCollapsed;
+    console.log('isCollapsed', this.isCollapsed);
   }
   onToggleSidenav(opened: boolean) {
     this.isCollapsed = !opened;

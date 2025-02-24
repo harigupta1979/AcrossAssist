@@ -1,123 +1,240 @@
+/* Main Container: Arrange Items Side by Side */
 .main-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: row;
-  min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: multiply;
-  background-image: url("../../../assets/img/Piaggio-BG.png");
-  border-radius: 0;
-  padding: 0 20px; /* Add some padding for smaller screens */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 20px;
 }
 
-.example-card,
+/* Main Container: Centers Login and Slider */
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 20px;
+}
+
+/* Left: Login Form */
 .outlet-container {
-  width: 100%;
-  max-width: 50%;
-  background-color: transparent;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.example-header-image-container {
-  margin: 0 10% 7%;
+/* Right: Logo & Carousel */
+.layout-right-side {
+  flex: 1;
   display: flex;
-  justify-content: start;
-}
-
-.example-header-image {
-  display: flex;
-  align-items: start;
-  width: 30%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #edf6ff;
   height: 100%;
-  display: block;
 }
 
-.heading {
-  margin: 0 10%;
+/* Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Logo Image */
+.example-header-image {
+  width: 70%;
+  max-width: 500px;
+  object-fit: contain;
+}
+
+/* Bootstrap Carousel */
+.carousel {
+  width: 50% !important;
+}
+.carousel-image {
+  width: 70% !important;
+  padding: 15px;
+  margin-left: 50px;
+  height: auto;
+}
+.carousel-item {
+  text-align: center;
+  position: relative;
+}
+.carousel-indicators {
+  bottom: -40px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.carousel-indicators button {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50%;
+  background-color: #1363df;
+  border: none;
+}
+.carousel-indicators button::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  background-color: #1363df;
+  white-space: nowrap;
+}
+
+.header-content {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.track-service-text {
   font-size: 18px;
   font-weight: 700;
-  letter-spacing: 0.25px;
-  color: #ffffff;
-  text-align: start;
+  flex-wrap: wrap;
+  color: #292731;
 }
 
-.description {
-  margin: 0 10%;
-  font-size: 12px;
-  line-height: 24px;
-  color: #f0f0f0;
-  display: block;
-  margin-top: 10px;
-  text-align: start;
+.status-text {
+  font-size: 11px;
+  font-family: Inter;
+  text-align: center;
+  color: #455360;
 }
+/* Responsive Design for Different Screen Sizes */
 
-/* Responsive Adjustments */
+/* Tablets and Medium Screens */
 @media (max-width: 1024px) {
-  .example-card,
-  .outlet-container {
-    max-width: 90%;
+  .main-container {
+    flex-direction: column; /* Stack items vertically */
+    height: auto;
+    gap: 30px;
+    padding: 20px;
   }
 
-  .example-header-image {
-    width: 50%;
+  .outlet-container,
+  .layout-right-side {
+    width: 90%;
+    flex: none; /* Remove flex-grow */
   }
 
-  .heading {
+  .carousel {
+    width: 80% !important;
+  }
+
+  .carousel-image {
+    width: 80% !important;
+    margin-left: 0;
+  }
+
+  .track-service-text {
     font-size: 16px;
   }
 
-  .description {
-    font-size: 14px;
+  .status-text {
+    font-size: 10px;
   }
 }
 
+/* Mobile Devices */
 @media (max-width: 768px) {
   .main-container {
     flex-direction: column;
-    padding: 0 10px;
     align-items: center;
+    gap: 20px;
+    height: auto;
+    padding: 20px;
   }
 
-  .example-card,
   .outlet-container {
-    max-width: 100%;
-    padding: 50px;
-    justify-content: center;
+    width: 100%;
   }
 
-  .example-header-image {
-    width: 70%;
-  }
-
-  .heading {
-    font-size: 14px;
-  }
-
-  .description {
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .example-card,
-  .outlet-container {
-    max-width: 100%;
+  .layout-right-side {
+    width: 100%;
     padding: 20px;
   }
 
   .example-header-image {
-    width: 100%;
+    width: 60%;
   }
 
-  .heading {
+  .carousel {
+    width: 90% !important;
+  }
+
+  .carousel-image {
+    width: 90% !important;
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .track-service-text {
+    font-size: 14px;
+  }
+
+  .status-text {
+    font-size: 9px;
+  }
+
+  .carousel-indicators {
+    bottom: -30px;
+  }
+
+  .carousel-indicators button {
+    width: 8px !important;
+    height: 8px !important;
+  }
+
+  .carousel-indicators button::after {
+    font-size: 10px;
+    top: 15px;
+  }
+}
+
+/* Small Mobile Screens */
+@media (max-width: 480px) {
+  .example-header-image {
+    width: 50%;
+  }
+
+  .carousel {
+    width: 95% !important;
+  }
+
+  .carousel-image {
+    width: 95% !important;
+    padding: 5px;
+  }
+
+  .track-service-text {
     font-size: 12px;
   }
 
-  .description {
-    font-size: 10px;
+  .status-text {
+    font-size: 8px;
+  }
+
+  .carousel-indicators {
+    bottom: -25px;
+  }
+
+  .carousel-indicators button {
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  .carousel-indicators button::after {
+    font-size: 9px;
+    top: 12px;
   }
 }

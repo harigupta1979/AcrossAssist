@@ -37,13 +37,19 @@
 }
 
 .login-heding {
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: Inter;
 }
 
 .login-heding-span {
   color: #333333;
-  font-size: 12px;
   margin: 0;
+  font-family: Inter;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 31.47px;
+  letter-spacing: 0%;
 }
 
 .login-mat-label {
@@ -59,7 +65,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0;
+  margin: 10;
   padding-bottom: 6%;
 }
 
@@ -71,7 +77,7 @@
 }
 
 .forgot-password-link {
-  width: 44%;
+  width: 48%;
   font-size: 12px;
   color: #2286d1;
   text-decoration: none;
@@ -83,14 +89,14 @@
 
 .login-button button {
   width: 100%;
-  /* border-radius: 12px; */
-  padding-top: 1%;
+  background-color: #1363df;
+  color: #ffffff;
+  border-radius: 4px;
   align-items: center;
+  text-align: center !important;
 }
 
 /* Responsive Styles */
-
-/* Medium devices (tablets and below) */
 @media (max-width: 1024px) {
   .login-sub-container {
     padding: 0 5%;
