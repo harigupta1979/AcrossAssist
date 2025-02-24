@@ -10,7 +10,6 @@
   margin-bottom: 15px;
   position: sticky;
   top: 0;
-  background: white;
   z-index: 10;
   padding-bottom: 10px;
 }
@@ -20,6 +19,7 @@
 }
 .vendorlist-text {
   font-size: 20px;
+  color: #333333;
   font-weight: 700;
 }
 .vendor-list-sub-text {
@@ -55,6 +55,9 @@
   opacity: 70%;
 }
 
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: #1363dfb2 !important;
+}
 button {
   margin-left: 16px;
 }
@@ -82,19 +85,25 @@ button {
 .mat-mdc-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: ccdeeb !important;
-  border: 1px solid #ccdeeb !important;
+  border: 1px solid #d9d9d94d !important;
   border-top-left-radius: 4px !important;
   border-top-right-radius: 4px !important;
+  border-top: 1px solid #ccdeeb;
+  border-right: 1px solid #ccdeeb;
+  border-left: 1px solid #ccdeeb;
 }
 
 th {
-  background-color: #f6f8fc;
+  background-color: #f6f8fc !important;
   font-weight: 600;
-  padding-top: 12px;
-  font-size: 14px;
+  /* padding-top: 12px; */
+  text-align: center !important;
+  font-size: 13px !important;
   font-family: Inter !important;
-  border-bottom: 1px solid #ccdeeb !important;
+  border-bottom: 2px solid #d9d9d94d !important;
+}
+.mdc-data-table__header-cell {
+  padding: 10px 10px !important;
 }
 
 td {
@@ -102,7 +111,7 @@ td {
   font-family: Inter !important;
   opacity: 80%;
   text-wrap: nowrap !important;
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
   border-top: 1px #e7f5ff;
   border-bottom: 1px solid #ccdeeb !important;
