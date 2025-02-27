@@ -11,6 +11,7 @@ import { UserRoleTabsComponent } from './components/user-role-master/user-role-t
 import { UserMasterComponent } from './components/user-role-master/user-master/user-master.component';
 import { RoleMasterComponent } from './components/user-role-master/role-master/role-master.component';
 import { PermissionsMasterComponent } from './components/user-role-master/permissions-master/permissions-master.component';
+import { BusinessDetailsComponent } from './auth/business-details/business-details.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
       { path: 'forgot-password', component: ForgotPasswordComponent },
       { path: 'otp-verification', component: OtpVerificationComponent },
       { path: 'set-password', component: SetPasswordComponent },
-
+      { path: 'business-details', component: BusinessDetailsComponent },
       {
         path: '',
         component: MainLayoutComponent, // Nest SideNav inside Layout
@@ -38,6 +39,15 @@ const routes: Routes = [
             ],
           },
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+        ],
+      },
+      {
+        path: 'onboarding',
+        // component: MainLayoutComponent,
+        children: [
+          { path: 'business-details', component: BusinessDetailsComponent },
+
+          { path: '', redirectTo: 'business-details', pathMatch: 'full' },
         ],
       },
     ],

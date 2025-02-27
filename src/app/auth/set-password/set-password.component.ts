@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-set-password',
   imports: [],
   templateUrl: './set-password.component.html',
-  styleUrl: './set-password.component.css'
+  styleUrl: './set-password.component.scss',
 })
-export class SetPasswordComponent {
-
-}
+export class SetPasswordComponent {}

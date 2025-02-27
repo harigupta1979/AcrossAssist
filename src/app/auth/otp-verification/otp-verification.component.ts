@@ -5,6 +5,6 @@ import { MaterialModule } from '../../shared/material.module';
   selector: 'app-otp-verification',
   imports: [MaterialModule],
   templateUrl: './otp-verification.component.html',
-  styleUrl: './otp-verification.component.css',
+  styleUrl: './otp-verification.component.scss',
 })
 export class OtpVerificationComponent {}

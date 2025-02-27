@@ -9,7 +9,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
   selector: 'app-root',
   imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'Acrossassist-front';

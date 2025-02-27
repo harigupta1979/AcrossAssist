@@ -12,7 +12,7 @@ import { ConfirmPasswordValidator } from '../../shared/Directives/confirm-passwo
   selector: 'app-forgot-password',
   imports: [MaterialModule],
   templateUrl: './forgot-password.component.html',
-  styleUrl: './forgot-password.component.css',
+  styleUrl: './forgot-password.component.scss',
 })
 export class ForgotPasswordComponent {
   isSubmitting = false;

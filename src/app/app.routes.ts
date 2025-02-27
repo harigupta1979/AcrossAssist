@@ -7,7 +7,7 @@ import { SetPasswordComponent } from './auth/set-password/set-password.component
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { AuthGuard } from './Services/auth.guard';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
-
+import { BusinessDetailsComponent } from './auth/business-details/business-details.component';
 
 export const routes: Routes = [
   {
@@ -18,14 +18,30 @@ export const routes: Routes = [
       { path: 'forgot-password', component: ForgotPasswordComponent },
       { path: 'otp-verification', component: OtpVerificationComponent },
       { path: 'set-password', component: SetPasswordComponent },
+
       { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },
   {
     path: '',
-    component: MainLayoutComponent,
-    canActivate:[AuthGuard],
-    loadChildren: () => import('../app/components/component.module').then(m => m.ComponentModule)
+    // component: MainLayoutComponent,
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('../app/components/component.module').then(
+        (m) => m.ComponentModule
+      ),
+  },
+  {
+    path: 'onboarding',
+    // component: MainLayoutComponent,
+    // canActivate: [AuthGuard], // Ensure user is logged in
+    children: [
+      { path: 'business-details', component: BusinessDetailsComponent },
+      // { path: 'branch-details', component: BranchDetailsComponent },
+      // { path: 'contact-details', component: ContactDetailsComponent },
+      // { path: 'bank-details', component: BankDetailsComponent },
+      { path: '', redirectTo: 'business-details', pathMatch: 'full' },
+    ],
   },
   { path: '**', component: PageNotFoundComponent },
 ];

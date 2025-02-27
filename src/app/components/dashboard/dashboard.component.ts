@@ -8,6 +8,6 @@ import { DaynamicSideNavComponent } from '../daynamic-side-nav/daynamic-side-nav
   selector: 'app-dashboard',
   imports: [MaterialModule],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
+  styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {}

@@ -15,7 +15,7 @@ import { dbCommonService } from '../../service/commonservice.service';
 import { Module, Role } from '../user-master/role.model';
 import { ToastService } from '../../../Services/toast.service';
 import { dbUserRoleService } from '../../service/user-role.service';
-import { FormBuilder, FormGroup,Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface RoleResponse {
   FinalMode: string | null;
@@ -26,7 +26,7 @@ interface RoleResponse {
   standalone: true,
   imports: [CommonModule, MaterialModule],
   templateUrl: './role-form.component.html',
-  styleUrl: './role-form.component.css',
+  styleUrl: './role-form.component.scss',
 })
 export class RoleFormComponent {
   @Output() close = new EventEmitter<void>();
@@ -77,7 +77,12 @@ export class RoleFormComponent {
   }
   async getrole() {
     let dataobj: Record<string, any> | null | undefined =
-      await this.sharedservice.GetSelection('reportingrole',null, this.roleForm.controls['RoleId'].value,  null);
+      await this.sharedservice.GetSelection(
+        'reportingrole',
+        null,
+        this.roleForm.controls['RoleId'].value,
+        null
+      );
 
     if (dataobj && dataobj['Data']) {
       this.reportingRoles = dataobj['Data'];

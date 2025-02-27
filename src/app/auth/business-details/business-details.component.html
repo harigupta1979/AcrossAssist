@@ -1,0 +1,67 @@
+<div class="vendor-details">
+  <!-- Left Side (Steps List) -->
+  <div class="vendor-details-left-side">
+    <div class="vendor-first-row">
+      <div class="logo-contianter">
+        <img src="../../../assets/img/image 1.png" alt="Logo" class="example-header-image" />
+      </div>
+    </div>
+
+    <div class="vendor-list-second-row">
+      <div class="vendor-steps-list">
+        <mat-card appearance="outlined" [class.active]="selectedStep === 0" (click)="goToStep(0)">
+          <mat-card-content>Business Details</mat-card-content>
+        </mat-card>
+        <mat-card appearance="outlined" [class.active]="selectedStep === 1" (click)="goToStep(1)">
+          <mat-card-content>Branch Details</mat-card-content>
+        </mat-card>
+        <mat-card appearance="outlined" [class.active]="selectedStep === 2" (click)="goToStep(2)">
+          <mat-card-content>Contact Info & Address</mat-card-content>
+        </mat-card>
+        <mat-card appearance="outlined" [class.active]="selectedStep === 3" (click)="goToStep(3)">
+          <mat-card-content>Bank Details</mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vertical Step Line -->
+  <div class="vertical-line">
+    <div *ngFor="let step of steps; let i = index" class="step-line" [class.active]="selectedStep >= i"></div>
+  </div>
+
+  <!-- Right Side (Stepper Content) -->
+  <div class="vendor-list-right-side">
+    <div class="vendor-second-row">
+      <ng-container [ngSwitch]="selectedStep">
+        <div *ngSwitchCase="0">
+          <h2>Business Details</h2>
+          <form formGroup="businessForm">
+            <mat-form-field>
+              <input matInput placeholder="Enterprise Name" formControlName="enterpriseName">
+            </mat-form-field>
+            <button mat-button (click)="nextStep()">Next</button>
+          </form>
+        </div>
+
+        <div *ngSwitchCase="1">
+          <h2>Branch Details</h2>
+          <p>Branch Details Form...</p>
+          <button mat-button (click)="nextStep()">Next</button>
+        </div>
+
+        <div *ngSwitchCase="2">
+          <h2>Contact Info & Address</h2>
+          <p>Contact Info Form...</p>
+          <button mat-button (click)="nextStep()">Next</button>
+        </div>
+
+        <div *ngSwitchCase="3">
+          <h2>Bank Details</h2>
+          <p>Bank Details Form...</p>
+          <button mat-button (click)="submitForm()">Submit</button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

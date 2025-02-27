@@ -18,7 +18,7 @@ import { EventEmitterService } from '../../service/eventemitter.service';
   standalone: true,
   imports: [MaterialModule, RouterModule],
   templateUrl: './user-role-tabs.component.html',
-  styleUrl: './user-role-tabs.component.css',
+  styleUrl: './user-role-tabs.component.scss',
 })
 export class UserRoleTabsComponent {
   selectedTabIndex = 0;

@@ -6,7 +6,7 @@ import { Router, RouterModule } from '@angular/router';
   selector: 'app-daynamic-side-nav',
   imports: [MaterialModule, RouterModule],
   templateUrl: './daynamic-side-nav.component.html',
-  styleUrl: './daynamic-side-nav.component.css',
+  styleUrl: './daynamic-side-nav.component.scss',
 })
 export class DaynamicSideNavComponent {
   isCollapsed = false;

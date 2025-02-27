@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-permissions-master',
   imports: [MaterialModule],
   templateUrl: './permissions-master.component.html',
-  styleUrl: './permissions-master.component.css',
+  styleUrl: './permissions-master.component.scss',
 })
 export class PermissionsMasterComponent {
   private subscription!: Subscription;
@@ -33,9 +33,11 @@ export class PermissionsMasterComponent {
 
   async ngOnInit() {
     await this.getrole();
-    this.subscription = this.eventEmitterService.savepermission$.subscribe(() => {
-      this.savePermissions();
-    });
+    this.subscription = this.eventEmitterService.savepermission$.subscribe(
+      () => {
+        this.savePermissions();
+      }
+    );
   }
   onaddnew() {
     this.activeMenuId = null;
@@ -203,7 +205,7 @@ export class PermissionsMasterComponent {
       //   closeButton:true,
       //   positionClass:'top-center',
       // });
-     alert(data['Message']);
+      alert(data['Message']);
       this.getRoleMenu();
     }
 

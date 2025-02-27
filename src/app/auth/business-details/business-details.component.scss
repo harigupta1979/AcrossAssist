@@ -1,0 +1,112 @@
+.vendor-details {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+}
+
+/* Left Side */
+.vendor-details-left-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: 20px;
+
+  .vendor-first-row {
+    padding-bottom: 20px;
+
+    .logo-contianter {
+      display: flex;
+      justify-content: flex-start;
+
+      .example-header-image {
+        width: 80%;
+      }
+    }
+  }
+
+  .vendor-list-second-row {
+    flex: 1;
+
+    .vendor-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+
+      mat-card {
+        cursor: pointer;
+        transition: 0.3s;
+        padding: 15px;
+        max-width: 250px;
+        width: 100%;
+        border: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        position: relative;
+
+
+
+        &.active {
+          background: #3f51b5;
+          color: white;
+          border-color: #3f51b5;
+
+          &::before {
+            background: #3f51b5;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Center Vertical Step Line */
+.vertical-line {
+  width: 3px;
+  background: lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+
+  .step-line {
+    width: 3px;
+    height: 60px;
+    background: lightgray;
+    transition: background 0.3s ease-in-out;
+
+    &.active {
+      background: #3f51b5;
+    }
+  }
+}
+
+/* Right Side */
+.vendor-list-right-side {
+  flex: 2;
+  padding-left: 20px;
+
+  .vendor-second-row {
+    display: flex;
+    flex-direction: column;
+
+    mat-stepper {
+      display: none; // Hide the default stepper UI
+
+      mat-step {
+        padding: 20px;
+
+        mat-form-field {
+          width: 100%;
+        }
+
+        button {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}

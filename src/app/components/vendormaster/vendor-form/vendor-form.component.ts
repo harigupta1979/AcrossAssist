@@ -19,7 +19,7 @@ interface CityData {
   selector: 'app-vendor-form',
   imports: [CommonModule, MaterialModule],
   templateUrl: './vendor-form.component.html',
-  styleUrl: './vendor-form.component.css',
+  styleUrl: './vendor-form.component.scss',
 })
 export class VendorFormComponent implements OnInit {
   vendorForm!: FormGroup;
@@ -29,13 +29,13 @@ export class VendorFormComponent implements OnInit {
   locationList: any[] = [];
   bankList: any[] = [];
   stateList: any[] = [];
-  uploadedFiles: any[] = []; 
+  uploadedFiles: any[] = [];
   documentTypes = [
     { ID: 1, NAME: 'PAN Card' },
     { ID: 2, NAME: 'GST Certificate' },
-    { ID: 3, NAME: 'Aadhaar' }
+    { ID: 3, NAME: 'Aadhaar' },
   ];
-  onboardID! :Number;
+  onboardID!: Number;
 
   constructor(
     private fb: FormBuilder,
@@ -43,7 +43,7 @@ export class VendorFormComponent implements OnInit {
 
     public dialogRef: MatDialogRef<VendorFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-     private dbService: dbVendorService,
+    private dbService: dbVendorService,
     private sharedservice: dbCommonService
   ) {}
   async ngOnInit(): Promise<void> {
@@ -93,7 +93,7 @@ export class VendorFormComponent implements OnInit {
       IFSCCode: [null],
       IsActive: [true],
       CreatedBy: [localStorage.getItem('UserId')],
-      UpdatedBy: [localStorage.getItem('UserId')]
+      UpdatedBy: [localStorage.getItem('UserId')],
     });
   }
 
@@ -102,7 +102,7 @@ export class VendorFormComponent implements OnInit {
   }
 
   async GetLocationByPinCode() {
-    if(this.vendorForm.controls['PinCode'].value.length<6){
+    if (this.vendorForm.controls['PinCode'].value.length < 6) {
       return;
     }
     let data: any = await this.sharedservice.GetSelectionDetailsByLocation(
@@ -140,12 +140,7 @@ export class VendorFormComponent implements OnInit {
   }
   async getBanklist() {
     const dataobj: Record<string, any> | null | undefined =
-      await this.sharedservice.GetSelection(
-        'bank',
-        null,
-        null,
-        null
-      );
+      await this.sharedservice.GetSelection('bank', null, null, null);
 
     if (dataobj && dataobj['Data']) {
       this.bankList = dataobj['Data'];
@@ -155,12 +150,7 @@ export class VendorFormComponent implements OnInit {
   }
   async getlocationlist() {
     const dataobj: Record<string, any> | null | undefined =
-      await this.sharedservice.GetSelection(
-        'state',
-        null,
-        null,
-        null
-      );
+      await this.sharedservice.GetSelection('state', null, null, null);
 
     if (dataobj && dataobj['Data']) {
       this.locationList = dataobj['Data'];
@@ -170,12 +160,7 @@ export class VendorFormComponent implements OnInit {
   }
   async getaccounttypelist() {
     const dataobj: Record<string, any> | null | undefined =
-      await this.sharedservice.GetSelection(
-        'accounttype',
-        null,
-        null,
-        null
-      );
+      await this.sharedservice.GetSelection('accounttype', null, null, null);
 
     if (dataobj && dataobj['Data']) {
       this.accountTypeList = dataobj['Data'];
@@ -183,15 +168,15 @@ export class VendorFormComponent implements OnInit {
       this.accountTypeList = [];
     }
   }
- 
+
   async onSubmit(): Promise<void> {
-      if (this.vendorForm.invalid) {
+    if (this.vendorForm.invalid) {
       alert('Form is invalid!');
       return;
     }
     console.log(this.uploadedFiles);
     try {
-      const response :any= await this.dbService.PostService(
+      const response: any = await this.dbService.PostService(
         this.vendorForm.value
       );
 
@@ -199,14 +184,14 @@ export class VendorFormComponent implements OnInit {
         response &&
         (response.FinalMode === 'INSERT' || response.FinalMode === 'UPDATE')
       ) {
-        this.onboardID=response.Recid;
+        this.onboardID = response.Recid;
         // this.toastr.showSuccess(
         //   response.Message || 'Vendor onbosrded successfully!',
         //   'Role'
         // );
         // await this.addNew();
-       await this.uploadDocument();
-        
+        await this.uploadDocument();
+
         this.closeDialog(true);
       } else {
         this.toastr.showError(
@@ -246,21 +231,29 @@ export class VendorFormComponent implements OnInit {
       alert('Form is invalid!');
       return;
     }
-    
+
     try {
-      const modifiedFiles = this.uploadedFiles.map(file => ({
-        ...file,  // Spread the existing file object
-        onboardID: this.onboardID  // Add onboardID
+      const modifiedFiles = this.uploadedFiles.map((file) => ({
+        ...file, // Spread the existing file object
+        onboardID: this.onboardID, // Add onboardID
       }));
       const formData = new FormData();
       formData.append('multifile', JSON.stringify(modifiedFiles)); // Upload all files as JSON
-      
+
       const response: any = await this.dbService.PostDocumentService(formData);
-      if (response && (response.FinalMode === 'INSERT' || response.FinalMode === 'UPDATE')) {
-        this.toastr.showSuccess(response.Message || 'Vendor onboarded successfully!');
+      if (
+        response &&
+        (response.FinalMode === 'INSERT' || response.FinalMode === 'UPDATE')
+      ) {
+        this.toastr.showSuccess(
+          response.Message || 'Vendor onboarded successfully!'
+        );
         this.closeDialog(true);
       } else {
-        this.toastr.showError(response?.Message || 'Error saving role!', 'Role');
+        this.toastr.showError(
+          response?.Message || 'Error saving role!',
+          'Role'
+        );
       }
     } catch (error) {
       console.error('Error during onSubmit:', error);
@@ -268,45 +261,42 @@ export class VendorFormComponent implements OnInit {
     }
   }
 
-  
-
-
-
-
   isDocumentTypeUploaded(docTypeId: number): boolean {
-    console.log("uploadedFiles:", this.uploadedFiles);
-    console.log("Checking for DocumentTypeId:", docTypeId);
-    return this.uploadedFiles.some(f => f.DocumentTypeId === docTypeId);
+    console.log('uploadedFiles:', this.uploadedFiles);
+    console.log('Checking for DocumentTypeId:', docTypeId);
+    return this.uploadedFiles.some((f) => f.DocumentTypeId === docTypeId);
   }
 
   // Get the filtered list of files for a particular DocumentTypeId
   getFilesForDocumentType(docTypeId: number) {
-    return this.uploadedFiles.filter(f => f.DocumentTypeId === docTypeId);
+    return this.uploadedFiles.filter((f) => f.DocumentTypeId === docTypeId);
   }
 
   // Method to handle file upload (you need to implement the actual logic)
   async onFilesChange(e: any, docTypeId: number) {
     // Your file upload handling logic here
     const files = e.target.files[0];
-    var documentType = this.documentTypes.filter(x => x.ID ==docTypeId )[0].NAME;
-  
-     
-      if (e.target.files && e.target.files[0]) {
-        (await this.convertFile(files)).subscribe(async base64 => {
-          
-          this.uploadedFiles.push({ DocumentId:null,
-            FileSize:`${files.size / 1024}KB`,
-            FileName:files.name,
-            FileExtension:files.name.substring(files.name.lastIndexOf('.') + 1),
-            DocumentType:documentType,
-            DocumentBas64:base64,
-            DocumentTypeId:docTypeId});
+    var documentType = this.documentTypes.filter((x) => x.ID == docTypeId)[0]
+      .NAME;
+
+    if (e.target.files && e.target.files[0]) {
+      (await this.convertFile(files)).subscribe(async (base64) => {
+        this.uploadedFiles.push({
+          DocumentId: null,
+          FileSize: `${files.size / 1024}KB`,
+          FileName: files.name,
+          FileExtension: files.name.substring(files.name.lastIndexOf('.') + 1),
+          DocumentType: documentType,
+          DocumentBas64: base64,
+          DocumentTypeId: docTypeId,
         });
-      }
-     
+      });
+    }
   }
 
   deleteFile(docTypeId: number) {
-    this.uploadedFiles = this.uploadedFiles.filter(f => f.DocumentTypeId !== docTypeId);
+    this.uploadedFiles = this.uploadedFiles.filter(
+      (f) => f.DocumentTypeId !== docTypeId
+    );
   }
 }

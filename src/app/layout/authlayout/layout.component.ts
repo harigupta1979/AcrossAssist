@@ -12,6 +12,6 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   standalone: true,
   imports: [MaterialModule, RouterModule, CommonModule],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css',
+  styleUrl: './layout.component.scss',
 })
 export class LayoutComponent {}

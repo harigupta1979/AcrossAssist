@@ -13,7 +13,7 @@ import { MaterialModule } from '../../../shared/material.module';
   selector: 'app-role-master',
   imports: [MaterialModule, MatButtonModule],
   templateUrl: './role-master.component.html',
-  styleUrl: './role-master.component.css',
+  styleUrl: './role-master.component.scss',
 })
 export class RoleMasterComponent {
   private subscription!: Subscription;
@@ -64,13 +64,13 @@ export class RoleMasterComponent {
       });
     }
   }
-  editRole(role: any,mode:string) {
+  editRole(role: any, mode: string) {
     console.log('Editing Role:', role);
     this.dialog
       .open(RoleFormComponent, {
         width: '500px',
         disableClose: true,
-        data: { role ,pageMode:mode},
+        data: { role, pageMode: mode },
         position: {
           right: '0px',
           top: '50px',

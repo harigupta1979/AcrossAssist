@@ -4,11 +4,13 @@
   display: flex;
   flex-direction: column;
 }
+
 .cross-btn {
   width: 8%;
   border: none;
   outline: none;
 }
+
 .user-head-container {
   display: flex;
   justify-content: space-between;
@@ -28,6 +30,7 @@
   align-items: center;
   width: 100%;
 }
+
 /* Form Row */
 .form-row-first,
 .form-row {
@@ -57,27 +60,33 @@ mat-form-field .mat-input-element {
 mat-form-field .mat-form-field-outline {
   border-radius: 12px !important;
 }
+
 .form-row-button {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
 }
+
 .cancelBtn {
   border-radius: 92px;
 }
+
 .SaveBtn {
   background-color: #4285f4;
   border-radius: 92px;
   color: #ffff;
 }
+
 .mat-mdc-form-field-error {
   text-align: start;
   display: flex;
   font-size: 10px;
 }
+
 .mdc-text-field--outlined {
-  height: 50px !;
+  height: 50px !important;
 }
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .form-row {

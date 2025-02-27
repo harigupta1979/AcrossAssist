@@ -10,10 +10,10 @@ import { AuthService } from '../../Services/auth.service';
   standalone: true,
   imports: [MaterialModule],
   templateUrl: './top-navbar.component.html',
-  styleUrl: './top-navbar.component.css',
+  styleUrl: './top-navbar.component.scss',
 })
 export class TopNavbarComponent {
-  constructor(private router: Router,private authservice: AuthService) {}
+  constructor(private router: Router, private authservice: AuthService) {}
   viewProfile() {
     this.router.navigate(['/profile']);
   }
@@ -24,7 +24,7 @@ export class TopNavbarComponent {
 
   async logout() {
     await this.authservice.logout();
-    localStorage.removeItem('userRole'); // Clear user session
+    localStorage.removeItem('userRole');
     this.router.navigate(['/login']);
   }
 }

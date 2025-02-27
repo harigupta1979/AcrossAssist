@@ -35,9 +35,9 @@ interface ApiResponse {
   standalone: true,
   imports: [CommonModule, MaterialModule],
   templateUrl: './user-from.component.html',
-  styleUrl: './user-from.component.css',
+  styleUrl: './user-from.component.scss',
 })
-export class UserFromComponent  implements OnInit{
+export class UserFromComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
   @Output() refreshList = new EventEmitter<void>();
   @ViewChild('closeButton') closeButton!: ElementRef; // Close button reference

@@ -13,6 +13,6 @@ import { DaynamicSideNavComponent } from '../../components/daynamic-side-nav/day
     TopNavbarComponent,
   ],
   templateUrl: './main-layout.component.html',
-  styleUrl: './main-layout.component.css',
+  styleUrl: './main-layout.component.scss',
 })
 export class MainLayoutComponent {}

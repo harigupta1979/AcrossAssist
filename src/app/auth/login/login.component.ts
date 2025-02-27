@@ -13,7 +13,7 @@ import { SharedserviceService } from '../../Services/sharedservice.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
   imports: [MaterialModule, MatButtonModule, MatDividerModule, MatIconModule],
 })
 export class LoginComponent implements OnInit {
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       username: this.loginForm.controls['username'].value,
       password: this.crypto.encrypt(this.loginForm.controls['password'].value),
     };
-console.log(loginForm,'pallavi.kadam@quantique.ai')
+    console.log(loginForm, 'pallavi.kadam@quantique.ai');
     let dt: any = await this.auth.CheckUserLogin(loginForm);
 
     if (dt != null && dt['FinalMode'] == 'DataFound' && dt['Message'] != '') {
@@ -63,7 +63,11 @@ console.log(loginForm,'pallavi.kadam@quantique.ai')
 
     localStorage.setItem('Dynemicmenu', '');
     let data: any = await this.auth.GetLogin(loginForm);
-    if (data != null && data['FinalMode'] == 'DataFound' && data['AdditionalParameter'] != '') {
+    if (
+      data != null &&
+      data['FinalMode'] == 'DataFound' &&
+      data['AdditionalParameter'] != ''
+    ) {
       var logindata = data['Data'][0];
       localStorage.setItem('UserId', logindata['USER_ID']);
       localStorage.setItem('UserName', logindata['USER_NAME']);
@@ -97,7 +101,7 @@ console.log(loginForm,'pallavi.kadam@quantique.ai')
       } else {
         localStorage.setItem('LOGIN_DATETIME', new Date().toString());
       }
-      
+
       //await this.menu.resetUserProfile();
       var Lastloggedon =
         ActivityData == null
@@ -114,10 +118,9 @@ console.log(loginForm,'pallavi.kadam@quantique.ai')
       //await this.menu.setUserProfile(this.userprofile);
       await this.Getdynemicmenu();
       this.router.navigate(['/dashboard']);
-    }
-    else {
+    } else {
       localStorage.setItem('UserName', '');
-      alert("error while login,Please check!");
+      alert('error while login,Please check!');
       //this.toastr.error("error while login,Please check!", 'Login');
     }
     this.isSubmitting = false;

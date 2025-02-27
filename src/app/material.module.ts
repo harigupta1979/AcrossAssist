@@ -8,7 +8,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatGridListModule } from '@angular/material/grid-list';
 // Add more material modules here if needed
 @NgModule({
   imports: [
@@ -21,6 +23,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatDialogModule,
     MatSnackBarModule,
     MatSidenavModule,
+    MatStepperModule,
+    MatDividerModule,
+    MatGridListModule,
     // Add any other Material modules that you use across your app
   ],
   exports: [
@@ -33,6 +38,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatDialogModule,
     MatSnackBarModule,
     MatSidenavModule,
+    MatStepperModule,
+    MatDividerModule,
+    MatGridListModule,
     // Export the modules so they can be used in other modules
   ],
 })

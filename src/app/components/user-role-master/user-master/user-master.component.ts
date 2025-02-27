@@ -14,7 +14,7 @@ import { UserFromComponent } from '../user-from/user-from.component';
   selector: 'app-user-master',
   imports: [MaterialModule],
   templateUrl: './user-master.component.html',
-  styleUrl: './user-master.component.css',
+  styleUrl: './user-master.component.scss',
 })
 export class UserMasterComponent {
   private subscription!: Subscription;

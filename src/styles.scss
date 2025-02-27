@@ -1,14 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
 }
+
 .success-snackbar {
   background-color: #4caf50;
   color: white;
@@ -28,26 +31,34 @@ body {
   background-color: #ff9800;
   color: white;
 }
+
 .mat-drawer-inner-container {
-  overflow-y: auto !important; /* Enables scrolling */
-  scrollbar-width: none; /* Hides scrollbar in Firefox */
+  overflow-y: auto !important;
+  /* Enables scrolling */
+  scrollbar-width: none;
+  /* Hides scrollbar in Firefox */
 }
 
 .mat-drawer-inner-container::-webkit-scrollbar {
-  display: none; /* Hides scrollbar in Chrome, Safari, Edge */
+  display: none;
+  /* Hides scrollbar in Chrome, Safari, Edge */
 }
+
 .mat-expansion-panel-body {
   padding: 1px !important;
-  margin-left: 15px; /* Add slight spacing */
+  margin-left: 15px;
+  /* Add slight spacing */
 }
 
 .mdc-list-item--with-trailing-radio.mdc-list-item,
 .mdc-list-item--with-trailing-checkbox.mdc-list-item {
   height: auto !important;
 }
+
 .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
   color: #2286d1 !important;
 }
+
 .mdc-list-item--with-trailing-checkbox .mat-selected {
   background-color: #2286d199 !important;
 }
@@ -57,6 +68,7 @@ body {
   color: #1d1b20 !important;
   opacity: 80% !important;
 }
+
 th {
   padding-top: 18px !important;
   text-align: center !important;
@@ -64,6 +76,7 @@ th {
   text-align: center;
   text-wrap: nowrap !important;
 }
+
 td {
   color: #1d1b20 !important;
   opacity: 80% !important;
@@ -71,9 +84,11 @@ td {
   text-align: center;
   font-family: Mukta Vaani !important;
 }
+
 .mat-mdc-dialog-surface {
   border-radius: 0 !important;
 }
+
 /* Removes focus outline and shadows */
 .mat-focus-indicator {
   outline: none !important;
@@ -88,15 +103,18 @@ mat-form-field:focus-within {
   outline: none !important;
   box-shadow: none !important;
 }
+
 .mdc-text-field--outlined {
   height: 55px !important;
   font-size: 14px;
 }
+
 .mdc-list-item--with-trailing-checkbox.mdc-list-item {
   padding-left: 16px;
   padding-right: 0;
   display: flex;
 }
+
 .mat-mdc-select-value-text {
   font-size: 13px !important;
   font-family: Mukta Vaani !important;

@@ -12,7 +12,7 @@ import { dbVendorService } from '../../service/vendorservice.service';
   selector: 'app-vendor-list',
   imports: [CommonModule, MaterialModule],
   templateUrl: './vendor-list.component.html',
-  styleUrl: './vendor-list.component.css',
+  styleUrl: './vendor-list.component.scss',
 })
 export class VendorListComponent {
   displayedColumns: string[] = [
